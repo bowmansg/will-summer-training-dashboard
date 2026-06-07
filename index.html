@@ -803,6 +803,63 @@ function escapeHTML(s){
 }
 function typeClass(type){return typeInfo[normalizeType(type)]?.cls || 'other'}
 function typeLabel(type){return typeInfo[normalizeType(type)]?.label || type || 'Other'}
+function chipColorForClass(cls){
+  const root = getComputedStyle(document.documentElement);
+  const varMap = {
+    ice:'--ice',
+    strength:'--strength',
+    shooting:'--shooting',
+    stick:'--stick',
+    work:'--work',
+    recovery:'--recovery',
+    away:'--away'
+  };
+  const fallback = {
+    ice:'#1e9bf0',
+    strength:'#8b5cf6',
+    shooting:'#f97316',
+    stick:'#f4c430',
+    work:'#f4c430',
+    recovery:'#20c997',
+    away:'#ef4444',
+    other:'#8b8b8b'
+  };
+  const key = cls || 'other';
+  const cssVar = varMap[key];
+  return cssVar ? (root.getPropertyValue(cssVar).trim() || fallback[key] || fallback.other) : (fallback[key] || fallback.other);
+}
+function rgbFromColor(color){
+  const value = String(color || '').trim();
+  if(value.startsWith('#')){
+    let hex = value.slice(1);
+    if(hex.length === 3) hex = hex.split('').map(ch => ch + ch).join('');
+    if(hex.length === 6){
+      return {
+        r:parseInt(hex.slice(0,2),16),
+        g:parseInt(hex.slice(2,4),16),
+        b:parseInt(hex.slice(4,6),16)
+      };
+    }
+  }
+  const rgb = value.match(/rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)/i);
+  if(rgb){
+    return {r:Number(rgb[1]), g:Number(rgb[2]), b:Number(rgb[3])};
+  }
+  return {r:255, g:255, b:255};
+}
+function readableTextColor(backgroundColor){
+  const {r,g,b} = rgbFromColor(backgroundColor);
+  // YIQ brightness heuristic: dark/medium-dark chips get white text; light chips get dark text.
+  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+  return brightness < 140 ? '#ffffff' : '#111827';
+}
+function calendarChipHTML(label, cls='other'){
+  const safeClass = cls || 'other';
+  const bg = chipColorForClass(safeClass);
+  const fg = readableTextColor(bg);
+  return `<div class="day-chip ${safeClass}" style="background:${bg};color:${fg};">${escapeHTML(label)}</div>`;
+}
+
 function shortLabel(e){
   const t=String(e.title||'').trim();
   if(['Shooting/Skills','ShootingSkills'].includes(t)) return 'Skills';
@@ -975,10 +1032,10 @@ function renderMonth(){
     const dayEvents=eventsForDate(iso).slice(0,3);
     const away=getAwayBlock(iso);
     const chips=[];
-    if(away) chips.push(`<div class="day-chip away">${escapeHTML(away.event)}</div>`);
-    dayEvents.forEach(e=>chips.push(`<div class="day-chip ${typeClass(e.type)}">${escapeHTML(shortLabel(e))}</div>`));
+    if(away) chips.push(calendarChipHTML(away.event,'away'));
+    dayEvents.forEach(e=>chips.push(calendarChipHTML(shortLabel(e),typeClass(e.type))));
     const more=eventsForDate(iso).length - dayEvents.length;
-    if(more>0) chips.push(`<div class="day-chip">+${more} more</div>`);
+    if(more>0) chips.push(calendarChipHTML(`+${more} more`,'other'));
     cells.push(`<div class="day ${other?'other-month':''} ${iso===today?'today':''} ${iso===selectedDate?'selected':''}" onclick="setSelectedDate('${iso}');showView('day')"><div class="day-num">${d.getDate()}</div>${chips.join('')}</div>`);
   }
   cal.innerHTML=cells.join('');
