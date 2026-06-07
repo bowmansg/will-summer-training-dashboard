@@ -247,7 +247,7 @@
         <span class="pill"><span class="dot shooting"></span>Shooting/Skills</span>
         <span class="pill"><span class="dot away"></span>Away</span>
         <span class="pill"><span class="dot recovery"></span>Recovery</span>
-        <span class="pill"><span class="dot work"></span>Work</span>
+        <span class="pill"><span class="dot work"></span>Refereeing</span>
         <span class="pill"><span class="dot other"></span>Other</span>
       </div>
     </section>
@@ -283,7 +283,7 @@
                 <div class="quick-card"><div class="num" id="scheduledSkatesHome">0</div><div class="label">Ice</div></div>
                 <div class="quick-card"><div class="num" id="scheduledStrengthHome">0</div><div class="label">Workout</div></div>
                 <div class="quick-card"><div class="num" id="scheduledShootingHome">0</div><div class="label">Skills</div></div>
-                <div class="quick-card"><div class="num" id="scheduledStickHome">0</div><div class="label">Work</div></div>
+                <div class="quick-card"><div class="num" id="scheduledStickHome">0</div><div class="label">Refereeing</div></div>
               </div>
               <div class="status" id="remoteStatus">Loading shared schedule…</div>
             </div>
@@ -371,7 +371,7 @@
                 <option>Shooting/Skills</option>
                 <option>Away</option>
                 <option>Recovery</option>
-                <option>Work</option>
+                <option>Refereeing</option>
                 <option>Other</option>
               </select>
               <input type="number" id="journalMinutes" min="0" step="5" placeholder="Minutes">
@@ -395,17 +395,17 @@
             <h2>Add a scheduled item</h2>
             <p class="status">Added events save locally right away and are also sent to the shared Google Sheet.</p>
             <div class="form-grid">
-              <input type="date" id="eventDate" class="full" required>
+              <input type="date" id="eventDate" name="willEventDate" class="full" required autocomplete="off">
               <select id="eventType">
                 <option value="Workout">Workout</option>
                 <option value="Ice">On-Ice</option>
                 <option value="ShootingSkills">Shooting/Skills</option>
                 <option value="Away">Away</option>
                 <option value="Recovery">Recovery</option>
-                <option value="Work">Work</option>
+                <option value="Refereeing">Refereeing</option>
                 <option value="Other">Other</option>
               </select>
-              <input id="eventLocation" placeholder="Location">
+              <input id="eventLocation" name="willEventLocation" placeholder="Location" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
               <label class="full" style="display:flex;gap:8px;align-items:center;font-weight:900"><input type="checkbox" id="eventAllDay" style="width:auto" onchange="toggleAllDayEvent()"> All-day event</label>
               <div id="eventStartWrap">
                 <div class="field-label">Start time</div>
@@ -423,7 +423,7 @@
                   <select id="eventEndAmPm"><option value="">AM/PM</option><option>AM</option><option>PM</option></select>
                 </div>
               </div>
-              <input class="full" id="eventTitle" placeholder="Title" required>
+              <input class="full" id="eventTitle" name="willEventTitle" placeholder="Title" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
               <div class="full">
                 <div class="field-label">Calculated minutes</div>
                 <div id="eventMinutesDisplay" class="empty">Choose start and end times</div>
@@ -458,7 +458,7 @@
 <script>
 'use strict';
 
-const DASHBOARD_VERSION = 'will-template-2026-06-07-v2';
+const DASHBOARD_VERSION = 'will-template-2026-06-07-v3';
 const STORAGE_KEY = 'willSummerDashboardSessions_v1';
 const JOURNAL_KEY = 'willSummerDashboardJournal_v1';
 const DELETED_KEY = 'willSummerDashboardDeletedEvents_v1';
@@ -633,7 +633,7 @@ function normalizeType(type){
   if(lower.includes('away') || lower.includes('travel')) return 'Away';
   if(lower.includes('recover')) return 'Recovery';
   if(lower.includes('referee') || lower.includes('refereeing')) return 'Refereeing';
-  if(lower.includes('work')) return 'Refereeing';
+  if(lower === 'work' || lower.includes('referee') || lower.includes('refereeing')) return 'Refereeing';
   return typeInfo[t] ? t : 'Other';
 }
 
@@ -987,7 +987,7 @@ function renderTotals(){
   document.getElementById('scheduledSkatesHome').textContent=count('Ice');
   document.getElementById('scheduledStrengthHome').textContent=count('Workout');
   document.getElementById('scheduledShootingHome').textContent=count('ShootingSkills');
-  document.getElementById('scheduledStickHome').textContent=count('Work');
+  document.getElementById('scheduledStickHome').textContent=count('Refereeing');
   const allJournalEntries=combinedJournals();
   document.getElementById('loggedMinutes').textContent=allJournalEntries.reduce((sum,j)=>sum+Number(j.minutes||0),0);
   document.getElementById('journalEntries').textContent=allJournalEntries.length;
@@ -1214,7 +1214,7 @@ function saveScheduledEvent(){
   const start = allDay ? 'All Day' : timeFromParts('eventStart');
   const end = allDay ? '' : timeFromParts('eventEnd');
   if(!allDay && (!start || !end)){ alert('Please choose a start and end time, or select All-day event.'); return; }
-  const e=normalizeEvent({id:editingEventId || 'local-'+Date.now(), date, type:document.getElementById('eventType').value, start, end, title, location:document.getElementById('eventLocation').value.trim(), owner:'Parent', minutes: allDay ? 0 : calcMinutes(start,end)});
+  const e=normalizeEvent({id:editingEventId || 'local-'+Date.now(), date, type:normalizeType(document.getElementById('eventType').value), start, end, title, location:document.getElementById('eventLocation').value.trim(), owner:'Parent', minutes: allDay ? 0 : calcMinutes(start,end)});
   if(editingEventId){
     localAddedEvents = localAddedEvents.filter(item=>String(item.id)!==String(editingEventId));
     remoteEvents = remoteEvents.map(item=>String(item.id)===String(editingEventId) ? e : item);
