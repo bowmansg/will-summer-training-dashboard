@@ -948,7 +948,9 @@ function renderWeekList(){
   document.getElementById('weekListHome').innerHTML=grouped.join('') || '<div class="empty">No scheduled items in the next 7 days.</div>';
 }
 function renderWeekGrid(){
-  const start=startOfWeek(parseLocalDate(selectedDate));
+  // Week tab should match the practical "week ahead" behavior: selected day + next 6 days.
+  // This avoids showing the previous calendar week when today is Sunday.
+  const start=parseLocalDate(selectedDate || todayLocalISO());
   const end=addDays(start,6);
   document.getElementById('weekTitle').textContent=`${formatDateHuman(toISODate(start))} – ${formatDateHuman(toISODate(end))}`;
   const html=[];
