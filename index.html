@@ -458,7 +458,7 @@
 <script>
 'use strict';
 
-const DASHBOARD_VERSION = 'will-template-2026-06-07-v3';
+const DASHBOARD_VERSION = 'will-template-2026-06-07-v4-time-priority';
 const STORAGE_KEY = 'willSummerDashboardSessions_v1';
 const JOURNAL_KEY = 'willSummerDashboardJournal_v1';
 const DELETED_KEY = 'willSummerDashboardDeletedEvents_v1';
@@ -723,7 +723,7 @@ function normalizeEvent(row){
   const dateObj=parseLocalDate(rawDate);
   const date=dateObj ? toISODate(dateObj) : todayLocalISO();
   const type=normalizeType(rawType || rawTitle || 'Other');
-  let start=rowPick(row, ['start','Start','startTime','StartTime','Start Time','start_time','time','Time','begin','Begin','beginTime','Begin Time']);
+  let start=rowPick(row, ['time','Time','start','Start','startTime','StartTime','Start Time','start_time','begin','Begin','beginTime','Begin Time']);
   let end=rowPick(row, ['end','End','endTime','EndTime','End Time','end_time','finish','Finish','finishTime','Finish Time']) || notesMeta.end || '';
   let location=rowPick(row, ['location','Location','place','Place','venue','Venue','rink','Rink']) || notesMeta.location || '';
   let title=cleanTextValue(rawTitle) || notesMeta.focus || typeInfo[type]?.label || type;
