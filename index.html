@@ -458,12 +458,12 @@
 <script>
 'use strict';
 
-const DASHBOARD_VERSION = 'cam-cam-template-2026-06-07-v1';
-const STORAGE_KEY = 'camSummerDashboardSessions_v1';
-const JOURNAL_KEY = 'camSummerDashboardJournal_v1';
-const DELETED_KEY = 'camSummerDashboardDeletedEvents_v1';
+const DASHBOARD_VERSION = 'will-template-2026-06-07-v2';
+const STORAGE_KEY = 'willSummerDashboardSessions_v1';
+const JOURNAL_KEY = 'willSummerDashboardJournal_v1';
+const DELETED_KEY = 'willSummerDashboardDeletedEvents_v1';
 let editingEventId = '';
-const VERSION_KEY = 'camSummerDashboardVersion';
+const VERSION_KEY = 'willSummerDashboardVersion';
 const SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxjKgifU4eSbvqRbsmmYSdmAOcLmPsbdiU7zD9qP0CUEc32pcSTYshqPQdiXwb3f7-Itg/exec';
 
 // Home Screen web apps can keep different local storage than Safari.
@@ -474,7 +474,7 @@ try {
     // Clear only locally added schedule items from prior test builds.
     // Keep journal entries intact.
     Object.keys(localStorage).forEach(key => {
-      if (key.indexOf('camSummerDashboardSessions') === 0) localStorage.removeItem(key);
+      if (key.indexOf('willSummerDashboardSessions') === 0) localStorage.removeItem(key);
     });
     localStorage.setItem(VERSION_KEY, DASHBOARD_VERSION);
   }
