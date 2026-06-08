@@ -218,6 +218,17 @@
       .section,.form-grid{grid-template-columns:1fr}.quick{grid-template-columns:repeat(2,1fr)}.calendar{gap:4px}.day{min-height:92px;border-radius:12px;padding:5px}.day-chip{font-size:7.8px;padding:3px 4px}.dow{font-size:10px}.card{padding:15px}.week-grid{grid-template-columns:1fr}.week-day{min-height:unset}
       .legend-card{border-radius:18px}.journal-table{font-size:12px}
     }
+  
+    /* Mobile compact-header breathing room: keeps non-Home views below iPhone status/Dynamic Island area */
+    @media(max-width:860px){
+      body:not(.home-active) .compact-hero,
+      body:not(.home-active) .compact-header,
+      body:not(.home-active) .mini-hero,
+      body:not(.home-active) .hero.compact{
+        margin-top:calc(env(safe-area-inset-top) + 24px);
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -995,7 +1006,15 @@ function updateCompactHeader(name=getActiveViewName()){
   if(label) label.textContent=compactHeaderSubtitle(name);
 }
 
-function showView(name){
+
+    function updateHomeActiveClass(){
+      const activeTab = document.querySelector('.tab.active');
+      const activeView = document.querySelector('.view.active');
+      const isHome = (activeTab && activeTab.dataset && activeTab.dataset.view === 'home') || (activeView && activeView.id === 'home');
+      document.body.classList.toggle('home-active', !!isHome);
+    }
+
+    function showView(name){
   if(name === 'home'){
     const today = todayLocalISO();
     selectedDate = today;
@@ -1388,6 +1407,15 @@ function init(){
   renderAll(); loadRemoteEvents();
 }
 window.addEventListener('DOMContentLoaded', init);
-</script>
+
+    document.addEventListener('click', function(e){
+      if(e.target && e.target.classList && e.target.classList.contains('tab')){
+        setTimeout(updateHomeActiveClass, 0);
+      }
+    });
+    window.addEventListener('load', updateHomeActiveClass);
+    setTimeout(updateHomeActiveClass, 0);
+
+  </script>
 </body>
 </html>
