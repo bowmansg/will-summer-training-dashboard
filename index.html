@@ -229,6 +229,40 @@
       }
     }
 
+  
+    /* Month view: keep Today on the month navigation line so it does not waste a row */
+    .month-head-inline{
+      display:grid;
+      grid-template-columns:auto minmax(0,1fr) auto;
+      align-items:center;
+      gap:10px;
+    }
+    .month-center{text-align:center;min-width:0}
+    .month-title-row{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      min-width:0;
+      flex-wrap:nowrap;
+    }
+    .month-title-row h2{white-space:nowrap}
+    .month-today{
+      padding:8px 11px;
+      font-size:12px;
+      border-radius:12px;
+      line-height:1;
+      white-space:nowrap;
+    }
+    @media(max-width:860px){
+      .month-head-inline{gap:6px;margin-bottom:12px}
+      .month-head-inline > .navbtn{padding:10px 11px;font-size:12px;border-radius:14px}
+      .month-title-row{gap:6px}
+      .month-title-row h2{font-size:21px}
+      .month-today{padding:8px 9px;font-size:11px}
+      .month-label{font-size:10px}
+    }
+
   </style>
 </head>
 <body>
@@ -358,15 +392,17 @@
 
       <section class="view" id="view-month">
         <div class="card">
-          <div class="month-head">
+          <div class="month-head month-head-inline">
             <button class="navbtn secondary" onclick="moveMonth(-1)">‹ Previous</button>
-            <div style="text-align:center">
-              <div class="muted">Summer Calendar</div>
-              <h2 id="monthTitle" style="margin:2px 0 0">Month</h2>
+            <div class="month-center">
+              <div class="muted month-label">Summer Calendar</div>
+              <div class="month-title-row">
+                <h2 id="monthTitle" style="margin:2px 0 0">Month</h2>
+                <button class="navbtn secondary month-today" onclick="jumpToday()">Today</button>
+              </div>
             </div>
             <button class="navbtn secondary" onclick="moveMonth(1)">Next ›</button>
           </div>
-          <div class="controls" style="justify-content:center"><button class="navbtn secondary" onclick="jumpToday()">Today</button></div>
           <div class="calendar" id="monthCalendar"></div>
         </div>
       </section>
