@@ -263,6 +263,20 @@
       .month-label{font-size:10px}
     }
 
+  
+    /* Home Screen icon / standalone iPhone spacing:
+       prevents the Home hero from sitting under the status bar when launched from Add to Home Screen */
+    @media(max-width:860px){
+      body.ios-standalone.home-active .hero{
+        margin-top:calc(env(safe-area-inset-top) + 14px);
+      }
+    }
+    @media(max-width:860px) and (display-mode:standalone){
+      body.home-active .hero{
+        margin-top:calc(env(safe-area-inset-top) + 14px);
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1451,6 +1465,14 @@ window.addEventListener('DOMContentLoaded', init);
     });
     window.addEventListener('load', updateHomeActiveClass);
     setTimeout(updateHomeActiveClass, 0);
+
+  
+    function updateStandaloneClass(){
+      const isStandalone = (window.navigator && window.navigator.standalone === true) || window.matchMedia('(display-mode: standalone)').matches;
+      document.body.classList.toggle('ios-standalone', !!isStandalone);
+    }
+    window.addEventListener('load', updateStandaloneClass);
+    setTimeout(updateStandaloneClass, 0);
 
   </script>
 </body>
