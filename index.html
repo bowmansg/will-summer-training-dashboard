@@ -546,6 +546,38 @@
 'use strict';
 
 const DASHBOARD_VERSION = 'will-template-2026-06-07-v4-time-priority';
+
+
+const SCHEDULE_TIME_ZONE = 'America/Chicago';
+
+function scheduleTimeZoneOffsetMinutes(dateISO){
+  // Returns the UTC offset minutes for the schedule time zone on the given event date.
+  // Example: Chicago is 300 during daylight time and 360 during standard time.
+  try{
+    const base = dateISO ? new Date(`${dateISO}T12:00:00Z`) : new Date();
+    const parts = new Intl.DateTimeFormat('en-US',{
+      timeZone:SCHEDULE_TIME_ZONE,
+      year:'numeric',month:'2-digit',day:'2-digit',
+      hour:'2-digit',minute:'2-digit',second:'2-digit',
+      hour12:false
+    }).formatToParts(base).reduce((acc,p)=>{
+      if(p.type !== 'literal') acc[p.type] = p.value;
+      return acc;
+    },{});
+    const asUTC = Date.UTC(
+      Number(parts.year),
+      Number(parts.month)-1,
+      Number(parts.day),
+      Number(parts.hour),
+      Number(parts.minute),
+      Number(parts.second)
+    );
+    return Math.round((base.getTime() - asUTC) / 60000);
+  }catch(err){
+    return new Date().getTimezoneOffset();
+  }
+}
+
 const STORAGE_KEY = 'willSummerDashboardSessions_v1';
 const JOURNAL_KEY = 'willSummerDashboardJournal_v1';
 const DELETED_KEY = 'willSummerDashboardDeletedEvents_v1';
@@ -634,7 +666,7 @@ function startOfWeek(date){
   return addDays(d,diff);
 }
 
-function timeToMinutes(value){
+function timeToMinutes(value, dateISO){
   if(value === null || value === undefined) return null;
   if(value instanceof Date && !Number.isNaN(value.getTime())) return value.getHours()*60 + value.getMinutes();
   if(typeof value === 'number'){
@@ -674,7 +706,7 @@ function timeToMinutes(value){
   m = s.match(/(?:1899|1900)[^T\n]*T(\d{2}):(\d{2})/i);
   if(m){
     let mins = Number(m[1])*60 + Number(m[2]);
-    if(/Z\s*$/i.test(s)) mins = (mins - 360 + 1440) % 1440; // Sheet time-only UTC serialization from Central time.
+    if(/Z\s*$/i.test(s)) mins = (mins - scheduleTimeZoneOffsetMinutes(dateISO) + 1440) % 1440; // Sheet time-only UTC serialization converted using the schedule time zone.
     return mins;
   }
   m = s.match(/(?:1899|1900).*?(\d{1,2}):(\d{2})(?::\d{2})?/i);
@@ -693,20 +725,20 @@ function minutesToTimeLabel(total){
 function eventStartDateTime(e){
   const d=parseLocalDate(e.date);
   if(!d) return null;
-  const mins=timeToMinutes(e.start);
+  const mins=timeToMinutes(e.start,e.date);
   if(mins === -1) d.setHours(0,0,0,0);
   else if(mins === null) d.setHours(23,59,0,0);
   else d.setHours(Math.floor(mins/60), mins%60, 0, 0);
   return d;
 }
 function formatEventTime(e){
-  const s = minutesToTimeLabel(timeToMinutes(e.start));
-  const en = minutesToTimeLabel(timeToMinutes(e.end));
+  const s = minutesToTimeLabel(timeToMinutes(e.start,e.date));
+  const en = minutesToTimeLabel(timeToMinutes(e.end,e.date));
   if(s && en && s !== 'All Day') return `${s} – ${en}`;
   return s || '';
 }
-function calcMinutes(start,end){
-  const s=timeToMinutes(start), e=timeToMinutes(end);
+function calcMinutes(start,end,dateISO){
+  const s=timeToMinutes(start,dateISO), e=timeToMinutes(end,dateISO);
   if(s===null || e===null || s<0 || e<0) return 0;
   let diff=e-s;
   if(diff<0) diff+=24*60;
@@ -782,8 +814,8 @@ function isDuplicateAwayEvent(e){
 function eventQuality(e){
   let score = 0;
   if(e.localOverride) score += 100;
-  if(timeToMinutes(e.start) !== null) score += 10;
-  if(timeToMinutes(e.end) !== null || !e.end) score += 3;
+  if(timeToMinutes(e.start,e.date) !== null) score += 10;
+  if(timeToMinutes(e.end,e.date) !== null || !e.end) score += 3;
   if(e.location) score += 2;
   if(e.minutes) score += 1;
   if(e.builtIn || e.generated) score += 5;
@@ -816,7 +848,7 @@ function normalizeEvent(row){
   let end=rowPick(row, ['end','End','endTime','EndTime','End Time','end_time','finish','Finish','finishTime','Finish Time']) || notesMeta.end || '';
   let location=rowPick(row, ['location','Location','place','Place','venue','Venue','rink','Rink']) || notesMeta.location || '';
   let title=cleanTextValue(rawTitle) || notesMeta.focus || typeInfo[type]?.label || type;
-  let minutes=Number(rowPick(row, ['minutes','Minutes','duration','Duration','mins','Mins']) || notesMeta.minutes || calcMinutes(start,end) || 0);
+  let minutes=Number(rowPick(row, ['minutes','Minutes','duration','Duration','mins','Mins']) || notesMeta.minutes || calcMinutes(start,end,date) || 0);
   let owner=cleanTextValue(rowPick(row, ['owner','Owner','addedBy','AddedBy','Added By'])) || cleanTextValue(notesMeta.owner) || 'Parent';
 
   let event = {
@@ -840,8 +872,8 @@ function normalizeEvent(row){
   // If the shared Sheet sends a duplicate built-in item with blank or damaged time fields,
   // fill it from the built-in schedule and give it the same ID so it cannot appear twice.
   const builtIn = findBuiltInMatch(event);
-  const damagedStart = timeToMinutes(event.start) === null;
-  const damagedEnd = event.end && timeToMinutes(event.end) === null;
+  const damagedStart = timeToMinutes(event.start,event.date) === null;
+  const damagedEnd = event.end && timeToMinutes(event.end,event.date) === null;
   if(builtIn && (damagedStart || damagedEnd || !event.location || !event.minutes)){
     event.start = damagedStart ? builtIn.start : event.start;
     event.end = (!event.end || damagedEnd) ? builtIn.end : event.end;
@@ -875,7 +907,7 @@ function allSessions(){
 }
 function compareEvents(a,b){
   if(a.date !== b.date) return a.date.localeCompare(b.date);
-  const am=timeToMinutes(a.start); const bm=timeToMinutes(b.start);
+  const am=timeToMinutes(a.start,a.date); const bm=timeToMinutes(b.start,b.date);
   return (am ?? 9999) - (bm ?? 9999) || String(a.title).localeCompare(String(b.title));
 }
 
@@ -1379,7 +1411,7 @@ function startEditSelectedEvent(){
   const titleEl=document.getElementById('eventTitle'); if(titleEl) titleEl.value=e.title || '';
   ['eventStartHour','eventStartMinute','eventStartAmPm','eventEndHour','eventEndMinute','eventEndAmPm'].forEach(id=>{const el=document.getElementById(id); if(el) el.value='';});
   const allDayEl=document.getElementById('eventAllDay');
-  if(allDayEl) allDayEl.checked = timeToMinutes(e.start) === -1 || String(e.start||'').toLowerCase().includes('all day');
+  if(allDayEl) allDayEl.checked = timeToMinutes(e.start,e.date) === -1 || String(e.start||'').toLowerCase().includes('all day');
   setTimeParts('eventStart', e.start);
   setTimeParts('eventEnd', e.end);
   toggleAllDayEvent();
