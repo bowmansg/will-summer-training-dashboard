@@ -192,7 +192,25 @@
     .detail-label{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
     .detail-value{font-size:15px;font-weight:800;color:#171717;line-height:1.35}
     .detail-actions{display:flex;gap:10px;margin-top:14px}
+
+    /* Compact header used on non-Home tabs to save iPhone screen space. */
+    body.non-home .hero{display:none}
+    body:not(.non-home) .compact-header{display:none}
+    .compact-header{
+      background:linear-gradient(135deg,var(--warm) 0%,var(--warm2) 100%);
+      color:#fff;border-radius:22px;padding:12px 14px;margin-bottom:10px;
+      display:flex;align-items:center;gap:12px;box-shadow:0 8px 24px rgba(0,0,0,.08)
+    }
+    .compact-logo{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;padding:6px;flex:0 0 auto}
+    .compact-logo img{max-width:38px;max-height:38px;object-fit:contain;display:block}
+    .compact-logo-fallback{width:34px;height:34px;border-radius:10px;background:var(--warm);color:#fff;font-weight:900;display:none;align-items:center;justify-content:center}
+    .compact-copy{min-width:0;display:grid;gap:1px}
+    .compact-title{font-size:17px;font-weight:950;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .compact-subtitle{font-size:12px;font-weight:850;line-height:1.15;color:rgba(255,255,255,.86);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
     @media(max-width:860px){
+
+      .compact-header{border-radius:18px;padding:10px 12px;margin-bottom:8px}.compact-logo{width:42px;height:42px;border-radius:12px}.compact-logo img{max-width:34px;max-height:34px}.compact-title{font-size:16px}.compact-subtitle{font-size:11px}
       .wrap{padding:12px}
       .hero{padding:18px;border-radius:26px}.hero-grid{grid-template-columns:1fr;gap:14px}.hero-main{gap:12px}.logo-box{width:86px;height:78px;border-radius:18px}.logo-fallback{width:60px;height:60px;border-radius:16px;font-size:30px}.mission-logo{width:68px;height:68px}
       h1{font-size:38px}.hero-subtitle{font-size:25px}.hero-lead{font-size:15px;margin-top:18px}.hero-tools{gap:6px;margin-top:16px}.hero-tool{padding:9px 7px;border-radius:13px}.hero-tool span{font-size:9px}.hero-tool strong{font-size:10px}.next-card{padding:16px;border-radius:20px}.next-card .title{font-size:26px}
@@ -226,6 +244,14 @@
           <div class="title">—</div>
           <div class="meta">—</div>
         </div>
+      </div>
+    </header>
+
+    <header class="compact-header" id="compactHeader" aria-label="Compact dashboard header">
+      <div class="compact-logo"><img src="adrian-logo.png" alt="Adrian Bulldogs logo"><div class="compact-logo-fallback">W</div></div>
+      <div class="compact-copy">
+        <div class="compact-title">Will Summer Training</div>
+        <div class="compact-subtitle" id="compactViewLabel">Summer Training</div>
       </div>
     </header>
 
@@ -945,6 +971,30 @@ function moveDay(n){setSelectedDate(toISODate(addDays(parseLocalDate(selectedDat
 function moveWeek(n){setSelectedDate(toISODate(addDays(parseLocalDate(selectedDate), n)))}
 function moveMonth(n){displayMonth=addMonths(displayMonth,n); renderMonth();}
 
+
+function getActiveViewName(){
+  const active=document.querySelector('.tab.active');
+  return active ? active.dataset.view : 'home';
+}
+function compactHeaderSubtitle(name){
+  if(name === 'day') return formatDateHuman(selectedDate || todayLocalISO());
+  if(name === 'week'){
+    const start=parseLocalDate(selectedDate || todayLocalISO());
+    const end=addDays(start,6);
+    return `${formatDateHuman(toISODate(start))} – ${formatDateHuman(toISODate(end))}`;
+  }
+  if(name === 'month') return displayMonth.toLocaleDateString(undefined,{month:'long',year:'numeric'});
+  if(name === 'summary') return 'Training Summary';
+  if(name === 'journal') return 'Training Journal';
+  if(name === 'add') return 'Add Event';
+  return 'Summer Training';
+}
+function updateCompactHeader(name=getActiveViewName()){
+  document.body.classList.toggle('non-home', name !== 'home');
+  const label=document.getElementById('compactViewLabel');
+  if(label) label.textContent=compactHeaderSubtitle(name);
+}
+
 function showView(name){
   if(name === 'home'){
     const today = todayLocalISO();
@@ -961,6 +1011,7 @@ function showView(name){
   const view=document.getElementById('view-'+name);
   if(view) view.classList.add('active');
   renderAll();
+  updateCompactHeader(name);
 }
 function toggleLegend(){
   const card=document.getElementById('legendCard');
@@ -969,7 +1020,7 @@ function toggleLegend(){
 }
 
 function renderAll(){
-  renderNext(); renderDay(); renderWeekList(); renderWeekGrid(); renderMonth(); renderTotals(); renderJournals(); renderUpcoming(); updateMinutesDisplay();
+  renderNext(); renderDay(); renderWeekList(); renderWeekGrid(); renderMonth(); renderTotals(); renderJournals(); renderUpcoming(); updateMinutesDisplay(); updateCompactHeader(getActiveViewName());
 }
 function renderNext(){
   const now=new Date();
@@ -1131,8 +1182,8 @@ function compactJournalRow(j){
 }
 function renderJournals(){
   const allJournals=combinedJournals();
-  const cards=allJournals.slice(0,25).map(journalCard).join('');
-  const journalHtml=cards ? `<div class="journal-cards">${cards}</div>` : '<div class="empty">No journal entries yet.</div>';
+  const cards=allJournals.slice(0,40).map(compactJournalRow).join('');
+  const journalHtml=cards ? `<div class="compact-journal-list">${cards}</div>` : '<div class="empty">No journal entries yet.</div>';
   const summaryRows=allJournals.slice(0,40).map(compactJournalRow).join('');
   const summaryHtml=summaryRows ? `<div class="compact-journal-list">${summaryRows}</div>` : '<div class="empty">No journal entries yet.</div>';
   document.getElementById('journalHistory').innerHTML=journalHtml;
