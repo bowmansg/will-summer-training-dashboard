@@ -3,40 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#15110a" />
+  <meta name="theme-color" content="#082345" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="Will Hockey" />
+  <meta name="apple-mobile-web-app-title" content="Graycen Training" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <title>Will Summer Training Dashboard</title>
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=will-icon-1">
-  <link rel="icon" type="image/png" href="apple-touch-icon.png?v=will-icon-1">
+  <title>Graycen Summer Training Dashboard</title>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=mission-icon-3">
+  <link rel="icon" type="image/png" href="apple-touch-icon.png?v=mission-icon-3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f8f5ec;
-      --ink:#101828;
-      --muted:#667085;
-      --soft:#f8fafc;
-      --soft2:#ffffff;
-      --line:#e3dccb;
-      --warm:#15110a;
-      --warm2:#b48618;
-      --ice:#1e9bf0;
-      --ice-soft:#eaf6ff;
-      --ice-ink:#082345;
+      --bg:#ffffff;
+      --ink:#111111;
+      --muted:#646464;
+      --soft:#f6f6f4;
+      --soft2:#fbfbfa;
+      --line:#deded8;
+      --warm:#123d2a;
+      --warm2:#1f5a3f;
+      --ice:#39ff14;
+      --ice-soft:#eaffea;
+      --ice-ink:#0a3b05;
       --strength:#8b5cf6;
       --strength-soft:#f1eaff;
       --recovery:#20c997;
       --recovery-soft:#e7fff7;
       --shooting:#f97316;
       --shooting-soft:#fff0df;
-      --work:#f4c430;
-      --work-soft:#fff7d8;
+      --stick:#f4c430;
+      --stick-soft:#fff7d8;
       --away:#ef4444;
       --away-soft:#ffe9e9;
       --journal:#f2ebff;
@@ -57,10 +57,10 @@
     button,input,select,textarea{font:inherit}
     .wrap{max-width:1120px;margin:0 auto;padding:18px}
     .hero{
-      background:linear-gradient(135deg,#050505 0%,#15110a 58%,#b48618 100%);
+      background:linear-gradient(135deg,#0f2f21 0%,#17452f 70%,#10291f 100%);
       color:#fff;border-radius:30px;padding:24px;margin-bottom:14px;position:relative;overflow:hidden;box-shadow:var(--shadow)
     }
-    .hero:before{content:"";position:absolute;right:-90px;top:-120px;width:320px;height:320px;border-radius:50%;background:rgba(244,196,48,.20);filter:blur(2px)}
+    .hero:before{content:"";position:absolute;right:-90px;top:-120px;width:320px;height:320px;border-radius:50%;background:rgba(57,255,20,.16);filter:blur(2px)}
     .hero-inner{position:relative;z-index:1}
     .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:22px;align-items:center}
     .hero-main{display:flex;gap:18px;align-items:center}
@@ -73,9 +73,9 @@
     .hero-lead{color:#efece8;line-height:1.45;margin:24px 0 0;font-size:18px;font-weight:700;max-width:720px}
     .hero-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:22px;width:100%}
     .hero-tool{border:1px solid rgba(255,255,255,.20);background:rgba(255,255,255,.10);border-radius:16px;padding:12px 12px;text-align:center}
-    .hero-tool span{display:block;color:#f4c430;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+    .hero-tool span{display:block;color:var(--ice);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
     .hero-tool strong{font-size:14px;color:#fff}
-    .next-card{background:#fff;border:3px solid rgba(244,196,48,.90);border-radius:22px;padding:18px 20px;display:grid;gap:6px;color:#101828;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+    .next-card{background:#fff;border:3px solid rgba(57,255,20,.75);border-radius:22px;padding:18px 20px;display:grid;gap:6px;color:#101828;box-shadow:0 12px 30px rgba(0,0,0,.18)}
     .next-card .label{color:var(--warm2);text-transform:uppercase;font-weight:900;font-size:12px;letter-spacing:.08em}
     .next-card .title{font-size:28px;font-weight:900;line-height:1.05;color:#111827}
     .next-card .meta{color:#4b5563;font-size:15px;line-height:1.35;font-weight:750}
@@ -88,7 +88,7 @@
     .legend-card.collapsed .legend-body{display:none}
     .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:7px 10px;font-size:12px;font-weight:900;white-space:nowrap}
     .dot{width:10px;height:10px;border-radius:999px;display:inline-block;background:#bbb}
-    .dot.ice{background:var(--ice)} .dot.strength{background:var(--strength)} .dot.shooting{background:var(--shooting)} .dot.work{background:var(--work)} .dot.recovery{background:var(--recovery)} .dot.away{background:var(--away)} .dot.other{background:#8b8b8b}
+    .dot.ice{background:var(--ice)} .dot.strength{background:var(--strength)} .dot.shooting{background:var(--shooting)} .dot.stick{background:var(--stick)} .dot.recovery{background:var(--recovery)} .dot.away{background:var(--away)} .dot.other{background:#8b8b8b}
     main{display:block}
     .view{display:none}
     .view.active{display:block}
@@ -113,7 +113,7 @@
     .event.ice{border-left-color:var(--ice);background:linear-gradient(90deg,var(--ice-soft),#fff 42%)}
     .event.strength{border-left-color:var(--strength);background:linear-gradient(90deg,var(--strength-soft),#fff 42%)}
     .event.shooting{border-left-color:var(--shooting);background:linear-gradient(90deg,var(--shooting-soft),#fff 42%)}
-    .event.work{border-left-color:var(--work);background:linear-gradient(90deg,var(--work-soft),#fff 42%)}
+    .event.stick{border-left-color:var(--stick);background:linear-gradient(90deg,var(--stick-soft),#fff 42%)}
     .event.recovery{border-left-color:var(--recovery);background:linear-gradient(90deg,var(--recovery-soft),#fff 42%)}
     .event.away{border-left-color:var(--away);background:linear-gradient(90deg,var(--away-soft),#fff 42%)}
     .event .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
@@ -132,14 +132,14 @@
     .dow{font-weight:900;color:var(--muted);font-size:12px;text-align:center;padding:5px;text-transform:uppercase;letter-spacing:.06em}
     .day{min-height:112px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:7px;display:flex;flex-direction:column;gap:5px;overflow:hidden;cursor:pointer}
     .day.other-month{background:#f9f9f6;color:#bbb}
-    .day.today{outline:3px solid rgba(56,168,255,.50)}
+    .day.today{outline:3px solid rgba(57,255,20,.45)}
     .day.selected{outline:3px solid rgba(18,61,42,.28)}
     .day-num{font-size:12px;font-weight:900;color:#333}
     .day-chip{font-size:9px;font-weight:900;border-radius:999px;padding:4px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#eee;color:#111}
     .day-chip.ice{background:var(--ice);color:var(--ice-ink)}
     .day-chip.strength{background:var(--strength);color:#fff}
     .day-chip.shooting{background:var(--shooting);color:#fff}
-    .day-chip.work{background:var(--work);color:#3f3100}
+    .day-chip.stick{background:var(--stick);color:#3f3100}
     .day-chip.recovery{background:var(--recovery);color:#064e3b}
     .day-chip.away{background:var(--away);color:#fff}
     .week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
@@ -159,7 +159,7 @@
     .compact-journal-row.ice{border-left-color:var(--ice);background:linear-gradient(90deg,var(--ice-soft),#fff 40%)}
     .compact-journal-row.strength{border-left-color:var(--strength);background:linear-gradient(90deg,var(--strength-soft),#fff 40%)}
     .compact-journal-row.shooting{border-left-color:var(--shooting);background:linear-gradient(90deg,var(--shooting-soft),#fff 40%)}
-    .compact-journal-row.work{border-left-color:var(--work);background:linear-gradient(90deg,var(--work-soft),#fff 40%)}
+    .compact-journal-row.stick{border-left-color:var(--stick);background:linear-gradient(90deg,var(--stick-soft),#fff 40%)}
     .compact-journal-row.recovery{border-left-color:var(--recovery);background:linear-gradient(90deg,var(--recovery-soft),#fff 40%)}
     .compact-journal-row.away{border-left-color:var(--away);background:linear-gradient(90deg,var(--away-soft),#fff 40%)}
     .compact-journal-row .compact-top{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:900;line-height:1.2}
@@ -174,7 +174,7 @@
     .journal-entry-card .journal-pill.ice{background:var(--ice);color:var(--ice-ink)}
     .journal-entry-card .journal-pill.strength{background:var(--strength);color:#fff}
     .journal-entry-card .journal-pill.shooting{background:var(--shooting);color:#fff}
-    .journal-entry-card .journal-pill.work{background:var(--work);color:#3f3100}
+    .journal-entry-card .journal-pill.stick{background:var(--stick);color:#3f3100}
     .journal-entry-card .journal-pill.away{background:var(--away);color:#fff}
     .journal-entry-card .journal-pill.recovery{background:var(--recovery);color:#064e3b}
     .journal-entry-card .journal-tag{background:var(--journal);color:var(--journal-ink);border-radius:999px;padding:6px 10px;font-size:11px;font-weight:900}
@@ -193,6 +193,44 @@
     .detail-value{font-size:15px;font-weight:800;color:#171717;line-height:1.35}
     .detail-actions{display:flex;gap:10px;margin-top:14px}
 
+
+    /* v2A Daily Tracker cards */
+    .tracker-card{border:1px solid var(--line);border-left:7px solid #bbb;border-radius:20px;background:#fff;padding:14px;display:grid;gap:10px;box-shadow:0 6px 18px rgba(0,0,0,.035)}
+    .tracker-card.ice{border-left-color:var(--ice);background:linear-gradient(90deg,var(--ice-soft),#fff 44%)}
+    .tracker-card.strength{border-left-color:var(--strength);background:linear-gradient(90deg,var(--strength-soft),#fff 44%)}
+    .tracker-card.shooting{border-left-color:var(--shooting);background:linear-gradient(90deg,var(--shooting-soft),#fff 44%)}
+    .tracker-card.stick{border-left-color:var(--stick);background:linear-gradient(90deg,var(--stick-soft),#fff 44%)}
+    .tracker-card.recovery{border-left-color:var(--recovery);background:linear-gradient(90deg,var(--recovery-soft),#fff 44%)}
+    .tracker-card.away{border-left-color:var(--away);background:linear-gradient(90deg,var(--away-soft),#fff 44%)}
+    .tracker-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+    .tracker-time{font-size:13px;font-weight:950;color:#1f2937;white-space:nowrap}
+    .tracker-title{font-size:19px;font-weight:950;letter-spacing:-.25px;line-height:1.1}
+    .tracker-meta{font-size:13px;color:var(--muted);font-weight:800;line-height:1.35}
+    .tracker-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+    .tracker-actions.has-reset{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .mini-action{border:1px solid var(--line);border-radius:14px;background:#fff;color:#111827;font-weight:950;padding:10px 8px;cursor:pointer;font-size:12px}
+    .mini-action.done{background:#ecfdf3;border-color:#abefc6;color:#067647}
+    .mini-action.skip{background:#fff3f0;border-color:#ffd6cc;color:#b42318}
+    .mini-action.reset{background:#f8fafc;border-color:#cbd5e1;color:#344054}
+    .mini-action.journal{background:var(--journal);border-color:#dfd1ff;color:var(--journal-ink)}
+    .journal-state{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:5px 8px;font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.04em;background:#f2ebff;color:#5b3a8e;white-space:nowrap}
+    .journal-state.added{background:#d1fadf;color:#05603a}
+    .journal-state.needed{background:#fff7d8;color:#7a5d00}
+    .journal-context{border:2px solid #dfd1ff;background:linear-gradient(135deg,#f8f3ff,#ffffff);border-radius:20px;padding:13px 14px;margin-bottom:12px;display:grid;gap:3px}
+    .journal-context .ctx-label{font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.08em;color:#5b3a8e}
+    .journal-context .ctx-title{font-size:19px;font-weight:950;line-height:1.12;color:#111827}
+    .journal-context .ctx-meta{font-size:13px;font-weight:800;color:#667085;line-height:1.35}
+    .simple-journal-form textarea{min-height:76px}
+    .status-badge{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.04em;background:#eef2f6;color:#344054;white-space:nowrap}
+    .status-badge.completed{background:#d1fadf;color:#05603a}
+    .status-badge.skipped{background:#fee4e2;color:#b42318}
+    .status-badge.moved{background:#fef0c7;color:#93370d}
+    .status-badge.optional{background:#e0f2fe;color:#075985}
+    .command-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
+    .command-tile{border:1px solid var(--line);border-radius:18px;background:var(--soft);padding:12px;text-align:center;cursor:pointer;font-weight:950}
+    .command-tile span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+    @media(max-width:860px){.tracker-actions{grid-template-columns:1fr 1fr 1fr}.tracker-title{font-size:17px}.command-grid{grid-template-columns:repeat(2,1fr)}}
+
     /* Compact header used on non-Home tabs to save iPhone screen space. */
     body.non-home .hero{display:none}
     body:not(.non-home) .compact-header{display:none}
@@ -207,6 +245,82 @@
     .compact-copy{min-width:0;display:grid;gap:1px}
     .compact-title{font-size:17px;font-weight:950;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .compact-subtitle{font-size:12px;font-weight:850;line-height:1.15;color:rgba(255,255,255,.86);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+
+    .add-status-box{border:1px solid var(--line);border-radius:16px;background:var(--soft);padding:12px 13px;color:var(--muted);font-size:13px;font-weight:850;line-height:1.35}
+    .add-status-box.success{border-color:#9be7c2;background:#eafff4;color:#05603a}
+    .add-status-box.error{border-color:#ffc4c4;background:#fff0f0;color:#9a1616}
+    .repeat-box{border:1px solid var(--line);border-radius:18px;background:#f8fafc;padding:13px;display:grid;gap:10px}
+    .repeat-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .quick-add-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:860px){.repeat-row,.quick-add-row{grid-template-columns:1fr}}
+
+
+
+    /* v2D: very obvious edit mode so users do not confuse editing with adding */
+    .edit-mode-banner{
+      display:none;
+      border:2px solid #ef4444;
+      background:linear-gradient(135deg,#ef4444 0%,#b91c1c 100%);
+      color:#fff;
+      border-radius:18px;
+      padding:14px 15px;
+      margin:10px 0 14px;
+      font-size:13px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      box-shadow:0 10px 24px rgba(185,28,28,.22);
+    }
+    .edit-mode-banner strong{
+      display:block;
+      margin-top:6px;
+      font-size:22px;
+      line-height:1.05;
+      letter-spacing:-.3px;
+      text-transform:none;
+    }
+    .edit-mode-banner span{
+      display:block;
+      margin-top:5px;
+      font-size:12px;
+      line-height:1.25;
+      text-transform:none;
+      letter-spacing:0;
+      color:rgba(255,255,255,.90);
+    }
+    #eventFormCard.edit-mode{
+      border:3px solid #ef4444;
+      background:#fff7f7;
+      box-shadow:0 18px 50px rgba(185,28,28,.14);
+    }
+    #eventFormCard.edit-mode #eventFormModeLabel{
+      display:inline-flex;
+      width:auto;
+      background:#ef4444;
+      color:#fff;
+      border-radius:999px;
+      padding:7px 10px;
+      margin-bottom:8px;
+    }
+    #eventFormCard.edit-mode #eventFormTitle{
+      color:#991b1b;
+      font-size:28px;
+    }
+    #eventFormCard.edit-mode .edit-mode-banner{display:block;}
+    #eventFormCard.edit-mode #saveEventButton{
+      background:#ef4444;
+      box-shadow:0 8px 22px rgba(185,28,28,.18);
+    }
+    #eventFormCard.edit-mode #cancelEditButton{
+      border:2px solid #ef4444;
+      color:#991b1b;
+      background:#fff;
+    }
+    .editing-event-active .tabs .tab[data-view="add"]{
+      background:#ef4444;
+      color:#fff;
+    }
 
     @media(max-width:860px){
 
@@ -285,16 +399,16 @@
       <div class="hero-inner hero-grid">
         <div class="hero-left">
           <div class="hero-main">
-            <div class="logo-box"><img class="mission-logo" src="adrian-logo.png" alt="Adrian Bulldogs logo"><div class="logo-fallback" style="display:none">W</div></div>
+            <div class="logo-box"><img class="mission-logo" src="mission-logo.png" alt="Chicago Mission logo" onerror="this.onerror=null;this.src='https://chicagomission.com/wp-content/uploads/2026/05/Mission_Logo_2026-150x150-1.png';"><div class="logo-fallback" style="display:none">C</div></div>
             <div class="hero-name">
-              <h1>Will</h1>
+              <h1>Graycen</h1>
               <div class="hero-subtitle">Summer Training</div>
             </div>
           </div>
           <p class="hero-lead">Your summer training hub. Check your schedule, stay on top of the week ahead, and log the work that helps you get better — one day at a time.</p>
           <div class="hero-tools">
             <div class="hero-tool"><span>Plan</span><strong>Day · Week · Month</strong></div>
-            <div class="hero-tool"><span>Train</span><strong>Ice · Workout · Skills</strong></div>
+            <div class="hero-tool"><span>Train</span><strong>Ice · Off-Ice · Skills</strong></div>
             <div class="hero-tool"><span>Log</span><strong>What you trained</strong></div>
           </div>
         </div>
@@ -307,9 +421,9 @@
     </header>
 
     <header class="compact-header" id="compactHeader" aria-label="Compact dashboard header">
-      <div class="compact-logo"><img src="adrian-logo.png" alt="Adrian Bulldogs logo"><div class="compact-logo-fallback">W</div></div>
+      <div class="compact-logo"><img src="mission-logo.png" alt="Chicago Mission logo"><div class="compact-logo-fallback">C</div></div>
       <div class="compact-copy">
-        <div class="compact-title">Will Summer Training</div>
+        <div class="compact-title">Graycen Summer Training</div>
         <div class="compact-subtitle" id="compactViewLabel">Summer Training</div>
       </div>
     </header>
@@ -328,11 +442,11 @@
       <button class="legend-toggle" onclick="toggleLegend()"><span>Color Legend</span><span id="legendArrow">Show</span></button>
       <div class="legend-body">
         <span class="pill"><span class="dot ice"></span>On-Ice</span>
-        <span class="pill"><span class="dot strength"></span>Workout</span>
-        <span class="pill"><span class="dot shooting"></span>Shooting/Skills</span>
+        <span class="pill"><span class="dot strength"></span>Off-Ice</span>
+        <span class="pill"><span class="dot shooting"></span>Shooting</span>
         <span class="pill"><span class="dot away"></span>Away</span>
         <span class="pill"><span class="dot recovery"></span>Recovery</span>
-        <span class="pill"><span class="dot work"></span>Refereeing</span>
+        <span class="pill"><span class="dot work"></span>Stick</span>
         <span class="pill"><span class="dot other"></span>Other</span>
       </div>
     </section>
@@ -341,8 +455,8 @@
       <section class="view active" id="view-home">
         <div class="section">
           <div class="card">
-            <div class="muted">Today / Selected Day</div>
-            <h2 id="selectedDayTitleHome">Selected Day</h2>
+            <div class="muted">Daily Command Center</div>
+            <h2 id="selectedDayTitleHome">Today's Plan</h2>
             <div class="controls">
               <input type="date" id="selectedDate" onchange="onSelectedDateChange()" style="max-width:210px">
               <button class="navbtn secondary" onclick="jumpToday()">Today</button>
@@ -351,6 +465,16 @@
             <div class="event-list" id="dailySessionsHome"></div>
           </div>
           <div class="home-stack">
+            <div class="card">
+              <div class="muted">Quick Actions</div>
+              <h2>What do you need?</h2>
+              <div class="command-grid">
+                <button class="command-tile" onclick="showView('day')"><span>Open</span>Day Plan</button>
+                <button class="command-tile" onclick="showView('journal')"><span>Log</span>Journal</button>
+                <button class="command-tile" onclick="showView('add')"><span>Add</span>Event</button>
+                <button class="command-tile" onclick="showView('summary')"><span>Check</span>Progress</button>
+              </div>
+            </div>
             <div class="card">
               <div class="muted">This Week</div>
               <h2>Week Ahead</h2>
@@ -366,9 +490,9 @@
               <h2>Summer Totals</h2>
               <div class="quick">
                 <div class="quick-card"><div class="num" id="scheduledSkatesHome">0</div><div class="label">Ice</div></div>
-                <div class="quick-card"><div class="num" id="scheduledStrengthHome">0</div><div class="label">Workout</div></div>
-                <div class="quick-card"><div class="num" id="scheduledShootingHome">0</div><div class="label">Skills</div></div>
-                <div class="quick-card"><div class="num" id="scheduledStickHome">0</div><div class="label">Refereeing</div></div>
+                <div class="quick-card"><div class="num" id="scheduledStrengthHome">0</div><div class="label">Off-Ice</div></div>
+                <div class="quick-card"><div class="num" id="scheduledShootingHome">0</div><div class="label">Shooting</div></div>
+                <div class="quick-card"><div class="num" id="scheduledStickHome">0</div><div class="label">Stick</div></div>
               </div>
               <div class="status" id="remoteStatus">Loading shared schedule…</div>
             </div>
@@ -378,7 +502,7 @@
 
       <section class="view" id="view-day">
         <div class="card">
-          <div class="muted">Selected Day</div>
+          <div class="muted">Today's Training Plan</div>
           <h2 id="selectedDayTitle">Daily Schedule</h2>
           <div class="controls">
             <button class="navbtn secondary" onclick="moveDay(-1)">‹ Previous</button>
@@ -424,47 +548,83 @@
       <section class="view" id="view-summary">
         <div class="section">
           <div class="card">
-            <div class="muted">Journal only</div>
-            <h2>Logged Minutes</h2>
+            <div class="muted">Training Tracker</div>
+            <h2>Progress Summary</h2>
             <div class="quick">
-              <div class="quick-card"><div class="num" id="loggedMinutes">0</div><div class="label">Minutes</div></div>
-              <div class="quick-card"><div class="num" id="journalEntries">0</div><div class="label">Entries</div></div>
-              <div class="quick-card"><div class="num" id="awayDays">0</div><div class="label">Away Days</div></div>
-              <div class="quick-card"><div class="num" id="homeSkills">0</div><div class="label">Skills Logged</div></div>
+              <div class="quick-card"><div class="num" id="summaryCompleted">0</div><div class="label">Completed</div></div>
+              <div class="quick-card"><div class="num" id="summaryPlanned">0</div><div class="label">Planned</div></div>
+              <div class="quick-card"><div class="num" id="summarySkipped">0</div><div class="label">Skipped</div></div>
+              <div class="quick-card"><div class="num" id="summaryCompletionPct">0%</div><div class="label">Done Rate</div></div>
+            </div>
+            <div class="quick" style="margin-top:10px">
+              <div class="quick-card"><div class="num" id="summaryCompletedMinutes">0</div><div class="label">Done Min</div></div>
+              <div class="quick-card"><div class="num" id="summaryOnIce">0</div><div class="label">Ice</div></div>
+              <div class="quick-card"><div class="num" id="summaryOff-Ice">0</div><div class="label">Off-Ice</div></div>
+              <div class="quick-card"><div class="num" id="summarySkills">0</div><div class="label">Shooting</div></div>
             </div>
           </div>
           <div class="card">
-            <h2>Journal History</h2>
+            <div class="muted">Simple Journal</div>
+            <h2>Journal Summary</h2>
+            <div class="quick">
+              <div class="quick-card"><div class="num" id="journalEntries">0</div><div class="label">Entries</div></div>
+              <div class="quick-card"><div class="num" id="summaryJournalNeeded">0</div><div class="label">Needed</div></div>
+              <div class="quick-card"><div class="num" id="summaryGreatEffort">0</div><div class="label">Great Effort</div></div>
+              <div class="quick-card"><div class="num" id="summaryGoodEnergy">0</div><div class="label">Good Energy</div></div>
+            </div>
             <div class="controls">
               <button class="btn secondary" onclick="exportDashboardData()">Export Backup</button>
-              <button class="btn secondary" onclick="resetDashboardData()">Reset Saved Data</button>
+              <button class="btn secondary" onclick="resetDashboardData()">Reset Local Data</button>
             </div>
-            <div id="journalHistorySummary"></div>
           </div>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <h2>Recent Journal Entries</h2>
+          <div id="journalHistorySummary"></div>
         </div>
       </section>
 
       <section class="view" id="view-journal">
         <div class="section">
           <div class="card">
-            <div class="muted">Will journal</div>
-            <h2>What did you work on?</h2>
-            <p class="status">Simple activity log. Choose the activity, enter minutes, and write one quick line about what you worked on.</p>
-            <div class="form-grid">
+            <div class="muted">Simple event journal</div>
+            <h2 id="journalFormTitle">Journal Entry</h2>
+            <div class="journal-context" id="journalContextBox">
+              <div class="ctx-label">Journal for</div>
+              <div class="ctx-title" id="journalContextTitle">Select an event from Home or Day</div>
+              <div class="ctx-meta" id="journalContextMeta">Tap Journal on an event card to connect this entry to that session.</div>
+            </div>
+            <p class="status">Keep this quick. The goal is a 30-second log, not homework.</p>
+            <div class="form-grid simple-journal-form">
               <input type="date" id="journalDate" class="full">
-              <select id="journalType">
-                <option>Workout</option>
-                <option>On-Ice</option>
-                <option>Shooting/Skills</option>
-                <option>Away</option>
-                <option>Recovery</option>
-                <option>Refereeing</option>
-                <option>Other</option>
-              </select>
-              <input type="number" id="journalMinutes" min="0" step="5" placeholder="Minutes">
-              <label class="full" style="display:flex;gap:8px;align-items:center;font-weight:800"><input type="checkbox" id="journalRecovery" style="width:auto"> Recovery completed — stretch / treatment / sauna</label>
-              <textarea class="full" id="journalNote" placeholder="Quick note"></textarea>
+              <input type="hidden" id="journalEventId">
+              <input type="hidden" id="journalEventTitle">
+              <input type="hidden" id="journalEventType">
+              <input type="hidden" id="journalEventTime">
+              <textarea class="full" id="journalWorkedOn" placeholder="What did you work on? Example: shooting off pass, first touch, edges, puck protection"></textarea>
+              <div>
+                <div class="field-label">Effort</div>
+                <select id="journalEffort">
+                  <option value="">Choose effort</option>
+                  <option>Low</option>
+                  <option>Okay</option>
+                  <option>Good</option>
+                  <option>Great</option>
+                </select>
+              </div>
+              <div>
+                <div class="field-label">Energy</div>
+                <select id="journalEnergy">
+                  <option value="">Choose energy</option>
+                  <option>Tired</option>
+                  <option>Okay</option>
+                  <option>Good</option>
+                  <option>Great</option>
+                </select>
+              </div>
+              <textarea class="full" id="journalQuickNote" placeholder="Quick note optional"></textarea>
               <button class="btn full" onclick="saveJournalEntry()">Save Journal Entry</button>
+              <button class="btn secondary full" onclick="clearJournalForm()">Clear Journal Form</button>
             </div>
           </div>
           <div class="card">
@@ -477,22 +637,23 @@
 
       <section class="view" id="view-add">
         <div class="section">
-          <div class="card">
-            <div class="muted">Parent calendar</div>
-            <h2>Add a scheduled item</h2>
-            <p class="status">Added events save locally right away and are also sent to the shared Google Sheet.</p>
+          <div class="card" id="eventFormCard">
+            <div class="muted" id="eventFormModeLabel">Parent calendar</div>
+            <h2 id="eventFormTitle">Add a scheduled item</h2>
+            <div class="edit-mode-banner" id="editModeBanner">Editing Existing Event<strong id="editModeEventName">—</strong><span id="editModeEventMeta">Changes will update this one event only.</span></div>
+            <p class="status" id="eventFormHelp">Added events save locally right away and are also sent to the shared Google Sheet.</p>
             <div class="form-grid">
-              <input type="date" id="eventDate" name="willEventDate" class="full" required autocomplete="off">
+              <input type="date" id="eventDate" class="full" required>
               <select id="eventType">
-                <option value="Workout">Workout</option>
+                <option value="Strength">Off-Ice</option>
                 <option value="Ice">On-Ice</option>
-                <option value="ShootingSkills">Shooting/Skills</option>
+                <option value="Shooting">Shooting</option>
                 <option value="Away">Away</option>
                 <option value="Recovery">Recovery</option>
-                <option value="Refereeing">Refereeing</option>
+                <option value="Stickhandling">Stick</option>
                 <option value="Other">Other</option>
               </select>
-              <input id="eventLocation" name="willEventLocation" placeholder="Location" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+              <input id="eventLocation" name="graycen_event_location_v3c" placeholder="Location" autocomplete="off" autocapitalize="words" spellcheck="false">
               <label class="full" style="display:flex;gap:8px;align-items:center;font-weight:900"><input type="checkbox" id="eventAllDay" style="width:auto" onchange="toggleAllDayEvent()"> All-day event</label>
               <div id="eventStartWrap">
                 <div class="field-label">Start time</div>
@@ -510,12 +671,36 @@
                   <select id="eventEndAmPm"><option value="">AM/PM</option><option>AM</option><option>PM</option></select>
                 </div>
               </div>
-              <input class="full" id="eventTitle" name="willEventTitle" placeholder="Title" required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+              <input class="full" id="eventTitle" name="graycen_event_title_v3c" placeholder="Title" autocomplete="off" autocapitalize="words" spellcheck="false" required>
               <div class="full">
                 <div class="field-label">Calculated minutes</div>
                 <div id="eventMinutesDisplay" class="empty">Choose start and end times</div>
               </div>
-              <button class="btn full" id="saveEventButton" onclick="saveScheduledEvent()">Add To Calendar</button>
+              <div class="full repeat-box" id="repeatBox">
+                <div class="field-label">Repeat</div>
+                <select id="eventRepeat">
+                  <option value="none">Does not repeat</option>
+                  <option value="daily">Daily</option>
+                  <option value="weekdays">Weekdays</option>
+                  <option value="weekly">Weekly</option>
+                </select>
+                <div class="repeat-row">
+                  <div>
+                    <div class="field-label">Occurrences</div>
+                    <input type="number" id="eventRepeatCount" min="1" max="60" value="1">
+                  </div>
+                  <div>
+                    <div class="field-label">Or repeat until</div>
+                    <input type="date" id="eventRepeatUntil">
+                  </div>
+                </div>
+                <div class="status">For repeating items, the dashboard creates separate events so each one can be completed, skipped, or journaled.</div>
+              </div>
+              <div class="quick-add-row full">
+                <button class="btn full" id="saveEventButton" onclick="saveScheduledEvent()">Add To Calendar</button>
+                <button class="btn secondary full" id="skipEventButton" onclick="saveScheduledEvent('Skipped')">Log Skipped Item</button>
+              </div>
+              <div id="addEventStatus" class="add-status-box full">Ready to add a scheduled item.</div>
               <button class="btn secondary full" id="cancelEditButton" onclick="cancelEditEvent()" style="display:none">Cancel Edit</button>
             </div>
           </div>
@@ -545,7 +730,7 @@
 <script>
 'use strict';
 
-const DASHBOARD_VERSION = 'will-template-2026-06-07-v4-time-priority';
+const DASHBOARD_VERSION = 'graycen-dashboard-v3c-daily-tracker-2026-06-13';
 
 
 const SCHEDULE_TIME_ZONE = 'America/Chicago';
@@ -578,12 +763,14 @@ function scheduleTimeZoneOffsetMinutes(dateISO){
   }
 }
 
-const STORAGE_KEY = 'willSummerDashboardSessions_v1';
-const JOURNAL_KEY = 'willSummerDashboardJournal_v1';
-const DELETED_KEY = 'willSummerDashboardDeletedEvents_v1';
+const STORAGE_KEY = 'graycenSummerDashboardSessions_v3c';
+const JOURNAL_KEY = 'graycenSummerDashboardJournal_v3c';
+const DELETED_KEY = 'graycenSummerDashboardDeletedEvents_v3c';
 let editingEventId = '';
-const VERSION_KEY = 'willSummerDashboardVersion';
-const SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxjKgifU4eSbvqRbsmmYSdmAOcLmPsbdiU7zD9qP0CUEc32pcSTYshqPQdiXwb3f7-Itg/exec';
+let editingEventOriginalMinutes = 0;
+let userAdjustedEndTime = false;
+const VERSION_KEY = 'graycenSummerDashboardVersion';
+const SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw7-sHB4RcEVRg_GYjv_QnkUCi8-SH6X0nryXqqnnzev2fiUFJLrKef5CvIDKts9BotRw/exec';
 
 // Home Screen web apps can keep different local storage than Safari.
 // This version marker prevents old cached schedule data from distorting times.
@@ -593,31 +780,97 @@ try {
     // Clear only locally added schedule items from prior test builds.
     // Keep journal entries intact.
     Object.keys(localStorage).forEach(key => {
-      if (key.indexOf('willSummerDashboardSessions') === 0) localStorage.removeItem(key);
+      if (key.indexOf('graycenSummerDashboardSessions') === 0) localStorage.removeItem(key);
     });
     localStorage.setItem(VERSION_KEY, DASHBOARD_VERSION);
   }
 } catch (e) { console.warn('Version storage skipped', e); }
 
 const typeInfo = {
-  Ice:{label:'On-Ice', cls:'ice'},
-  Workout:{label:'Workout', cls:'strength'},
-  ShootingSkills:{label:'Shooting/Skills', cls:'shooting'},
-  Away:{label:'Away', cls:'away'},
-  Recovery:{label:'Recovery', cls:'recovery'},
-  Refereeing:{label:'Refereeing', cls:'work'},
-  Other:{label:'Other', cls:'other'}
+ Ice:{label:'On-Ice', cls:'ice'},
+ Strength:{label:'Off-ice', cls:'strength'},
+ Shooting:{label:'Shooting', cls:'shooting'},
+ Stickhandling:{label:'Stickhandling', cls:'stick'},
+ Recovery:{label:'Recovery', cls:'recovery'},
+ Game:{label:'Game', cls:'ice'},
+ Camp:{label:'Camp', cls:'other'},
+ Other:{label:'Other', cls:'other'},
+ Away:{label:'Away', cls:'away'}
 };
 
-const baseSessions = [];
-const awayBlocks = [];
-const builtInSchedule = [];
+const baseSessions = [
+ {date:'2026-06-01', type:'Ice', start:'12:10 PM', end:'1:10 PM', title:'Abbey', location:'Rosemont Ice Arena', owner:'Parent', minutes:60},
+ {date:'2026-06-02', type:'Ice', start:'11:10 AM', end:'12:10 PM', title:'Abbey', location:'Rosemont Ice Arena', owner:'Parent', minutes:60},
+ {date:'2026-06-03', type:'Ice', start:'4:30 PM', end:'5:30 PM', title:'Delaney', location:'Evanston', owner:'Parent', minutes:60},
+ {date:'2026-06-29', type:'Ice', start:'6:40 PM', end:'8:00 PM', title:'Boudreau', location:'NSIA', owner:'Parent', minutes:80},
+ {date:'2026-07-02', type:'Ice', start:'5:30 PM', end:'6:40 PM', title:'Boudreau', location:'Winnetka', owner:'Parent', minutes:70},
+ {date:'2026-07-13', type:'Ice', start:'6:30 PM', end:'7:50 PM', title:'Boudreau', location:'NSIA', owner:'Parent', minutes:80},
+ {date:'2026-07-16', type:'Ice', start:'5:30 PM', end:'6:40 PM', title:'Boudreau', location:'Winnetka', owner:'Parent', minutes:70},
+ {date:'2026-07-27', type:'Ice', start:'6:30 PM', end:'7:50 PM', title:'Boudreau', location:'NSIA', owner:'Parent', minutes:80},
+ {date:'2026-08-03', type:'Ice', start:'7:00 PM', end:'8:20 PM', title:'Boudreau', location:'NSIA', owner:'Parent', minutes:80},
+ {date:'2026-08-06', type:'Ice', start:'5:30 PM', end:'6:40 PM', title:'Boudreau', location:'Winnetka', owner:'Parent', minutes:70},
+ {date:'2026-08-10', type:'Ice', start:'7:00 PM', end:'8:20 PM', title:'Boudreau', location:'NSIA', owner:'Parent', minutes:80},
+ {date:'2026-06-01', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-06-02', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-06-04', type:'Strength', start:'9:30 AM', end:'10:30 AM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-06-05', type:'Strength', start:'11:30 AM', end:'12:30 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-06-08', type:'Strength', start:'11:30 AM', end:'12:30 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-06-09', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-06-19', type:'Strength', start:'11:30 AM', end:'12:30 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-06-30', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-07-01', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-07-02', type:'Strength', start:'9:30 AM', end:'10:30 AM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-07-03', type:'Strength', start:'11:30 AM', end:'12:30 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-07-13', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-07-14', type:'Strength', start:'9:30 AM', end:'10:30 AM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-07-15', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-07-16', type:'Strength', start:'9:30 AM', end:'10:30 AM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-07-17', type:'Strength', start:'11:30 AM', end:'12:30 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
+ {date:'2026-08-17', type:'Other', start:'All Day', end:'', title:'School starts', location:'School', owner:'Parent', minutes:0}
+];
+
+
+const awayBlocks = [
+ {start:'2026-06-10', end:'2026-06-10', event:'Chicago / Rochester travel', city:'Chicago / Rochester', limited:true},
+ {start:'2026-06-11', end:'2026-06-14', event:'PIP - Rochester', city:'Rochester', limited:true},
+ {start:'2026-06-15', end:'2026-06-18', event:'Central District', city:'Away', limited:true},
+ {start:'2026-06-24', end:'2026-06-28', event:'Cwench', city:'Away', limited:true},
+ {start:'2026-07-04', end:'2026-07-11', event:'Costa Rica', city:'Costa Rica', limited:true},
+ {start:'2026-07-19', end:'2026-07-24', event:'Natty Camp', city:'Away', limited:true},
+ {start:'2026-07-28', end:'2026-07-31', event:'Northeastern', city:'Boston', limited:true},
+ {start:'2026-08-04', end:'2026-08-06', event:'Tentative Michigan trip', city:'Michigan', limited:true, tentative:true}
+];
+
+
+function buildHomeSkills(){
+ const items=[];
+ const start=parseLocalDate('2026-06-01');
+ const end=parseLocalDate('2026-08-14');
+ let counter=0;
+ for(let d=new Date(start); d<=end; d=addDays(d,1)){
+ const day=d.getDay();
+ if(day===0 || day===6) continue;
+ const iso=toISODate(d);
+ if(getAwayBlock(iso)) continue;
+ const type = counter % 2 === 0 ? 'Stickhandling' : 'Shooting';
+ const evening = day===2 || day===4;
+ items.push({date:iso,type,start:evening?'6:30 PM':'9:00 AM',end:evening?'7:00 PM':'9:30 AM',title:type,location:'Home',owner:'Parent',minutes:30,generated:true});
+ counter++;
+ }
+ return items;
+}
+
+
+const rawHomeSkills = buildHomeSkills();
+const builtInSchedule = [...baseSessions, ...rawHomeSkills];
 let sessions = builtInSchedule.map(row => normalizeEvent({...row, builtIn:true}));
 let remoteEvents = [];
 let localAddedEvents = loadLocalAddedEvents();
 let remoteLoadedSuccessfully = false;
 let deletedEventIds = loadDeletedEventIds();
 let journals = loadJournals();
+let remoteJournals = [];
+let currentJournalEvent = null;
 let selectedDate = todayLocalISO();
 let displayMonth = parseLocalDate(selectedDate);
 
@@ -747,13 +1000,13 @@ function calcMinutes(start,end,dateISO){
 function normalizeType(type){
   const t=String(type||'Other').trim();
   const lower=t.toLowerCase();
-  if(['ice','on-ice','on ice','skate','skating'].includes(lower)) return 'Ice';
-  if(['workout','lift','conditioning','off-ice','off ice','off-ice workout','gym'].includes(lower)) return 'Workout';
-  if(lower.includes('shoot') || lower.includes('skill') || lower.includes('stick')) return 'ShootingSkills';
-  if(lower.includes('away') || lower.includes('travel')) return 'Away';
+  if(['ice','on-ice','on ice','skate','skating','game'].includes(lower)) return lower==='game' ? 'Game' : 'Ice';
+  if(['strength','off-ice','off ice','off-ice workout','workout','lift','conditioning','gym','phil'].includes(lower)) return 'Strength';
+  if(lower.includes('shoot') || lower.includes('skill')) return 'Shooting';
+  if(lower.includes('stick')) return 'Stickhandling';
   if(lower.includes('recover')) return 'Recovery';
-  if(lower.includes('referee') || lower.includes('refereeing')) return 'Refereeing';
-  if(lower === 'work' || lower.includes('referee') || lower.includes('refereeing')) return 'Refereeing';
+  if(lower.includes('away') || lower.includes('travel')) return 'Away';
+  if(lower.includes('camp')) return 'Camp';
   return typeInfo[t] ? t : 'Other';
 }
 
@@ -844,7 +1097,7 @@ function normalizeEvent(row){
   const dateObj=parseLocalDate(rawDate);
   const date=dateObj ? toISODate(dateObj) : todayLocalISO();
   const type=normalizeType(rawType || rawTitle || 'Other');
-  let start=rowPick(row, ['time','Time','start','Start','startTime','StartTime','Start Time','start_time','begin','Begin','beginTime','Begin Time']);
+  let start=rowPick(row, ['start','Start','startTime','StartTime','Start Time','start_time','time','Time','begin','Begin','beginTime','Begin Time']);
   let end=rowPick(row, ['end','End','endTime','EndTime','End Time','end_time','finish','Finish','finishTime','Finish Time']) || notesMeta.end || '';
   let location=rowPick(row, ['location','Location','place','Place','venue','Venue','rink','Rink']) || notesMeta.location || '';
   let title=cleanTextValue(rawTitle) || notesMeta.focus || typeInfo[type]?.label || type;
@@ -862,6 +1115,8 @@ function normalizeEvent(row){
     owner,
     minutes,
     notes: noteTextValue(rawNotes, notesMeta),
+    status: normalizeEventStatus(rowPick(row, ['status','Status']) || notesMeta.status || 'Planned'),
+    updatedAt: cleanTextValue(rowPick(row, ['updatedAt','UpdatedAt','updated_at','Updated At'])),
     recovery: !!notesMeta.recovery,
     remote: !!row.remote,
     generated: !!row.generated,
@@ -890,7 +1145,7 @@ function makeEventId(date,start,title){
 }
 function allSessions(){
   const bestBySemantic = new Map();
-  const sourceEvents = remoteLoadedSuccessfully ? [...sessions, ...remoteEvents] : [...sessions, ...remoteEvents, ...localAddedEvents];
+  const sourceEvents = [...sessions, ...remoteEvents, ...localAddedEvents];
   sourceEvents
     .map(normalizeEvent)
     .filter(e => e && e.date && e.title)
@@ -926,6 +1181,54 @@ function escapeHTML(s){
 }
 function typeClass(type){return typeInfo[normalizeType(type)]?.cls || 'other'}
 function typeLabel(type){return typeInfo[normalizeType(type)]?.label || type || 'Other'}
+function normalizeEventStatus(status){
+  const clean=String(status || '').trim().toLowerCase();
+  if(clean==='completed' || clean==='complete' || clean==='done') return 'Completed';
+  if(clean==='skipped' || clean==='skip') return 'Skipped';
+  if(clean==='moved' || clean==='rescheduled') return 'Moved';
+  if(clean==='optional') return 'Optional';
+  return 'Planned';
+}
+function statusClass(status){return normalizeEventStatus(status).toLowerCase();}
+function statusBadgeHTML(status){
+  const clean=normalizeEventStatus(status);
+  return `<span class="status-badge ${statusClass(clean)}">${escapeHTML(clean)}</span>`;
+}
+function journalForEvent(eventId){
+  if(!eventId) return null;
+  return combinedJournals().find(j=>String(j.eventId || '') === String(eventId)) || null;
+}
+function journalStateHTML(e){
+  const has = !!journalForEvent(e.id);
+  return `<span class="journal-state ${has?'added':'needed'}">${has?'Journal Added':'Journal Needed'}</span>`;
+}
+function trackerEventCard(e){
+  const cls=typeClass(e.type);
+  const time=formatEventTime(e) || 'All Day';
+  const safeId = encodeURIComponent(e.id || makeEventId(e.date,e.start,e.title));
+  const status = normalizeEventStatus(e.status || 'Planned');
+  const isDone = status === 'Completed';
+  const isSkipped = status === 'Skipped';
+  const hasJournal = !!journalForEvent(e.id);
+  const canReset = status !== 'Planned';
+  const resetButton = canReset ? `<button class="mini-action reset" onclick="event.stopPropagation();markEventStatus('${safeId}','Planned')">Reset</button>` : '';
+  return `<div class="tracker-card ${cls}">
+    <div class="tracker-head">
+      <div>
+        <div class="tracker-title">${escapeHTML(e.title)}</div>
+        <div class="tracker-meta">${escapeHTML(typeLabel(e.type))}${e.location ? ' · '+escapeHTML(e.location) : ''}${e.minutes ? ' · '+e.minutes+' min' : ''}</div>
+      </div>
+      <div style="display:grid;gap:6px;justify-items:end"><div class="tracker-time">${escapeHTML(time)}</div>${statusBadgeHTML(status)}${journalStateHTML(e)}</div>
+    </div>
+    ${e.notes ? `<div class="tracker-meta">${escapeHTML(e.notes)}</div>` : ''}
+    <div class="tracker-actions ${canReset ? 'has-reset' : ''}">
+      <button class="mini-action done" onclick="event.stopPropagation();markEventStatus('${safeId}','Completed')">${isDone ? 'Completed ✓' : 'Complete'}</button>
+      <button class="mini-action skip" onclick="event.stopPropagation();markEventStatus('${safeId}','Skipped')">${isSkipped ? 'Skipped ✓' : 'Skip'}</button>
+      ${resetButton}
+      <button class="mini-action journal" onclick="event.stopPropagation();openJournalForEvent('${safeId}')">${hasJournal ? 'View / Add Journal' : 'Journal'}</button>
+    </div>
+  </div>`;
+}
 function chipColorForClass(cls){
   const root = getComputedStyle(document.documentElement);
   const varMap = {
@@ -933,7 +1236,6 @@ function chipColorForClass(cls){
     strength:'--strength',
     shooting:'--shooting',
     stick:'--stick',
-    work:'--work',
     recovery:'--recovery',
     away:'--away'
   };
@@ -942,7 +1244,6 @@ function chipColorForClass(cls){
     strength:'#8b5cf6',
     shooting:'#f97316',
     stick:'#f4c430',
-    work:'#f4c430',
     recovery:'#20c997',
     away:'#ef4444',
     other:'#8b8b8b'
@@ -985,7 +1286,7 @@ function calendarChipHTML(label, cls='other'){
 
 function shortLabel(e){
   const t=String(e.title||'').trim();
-  if(['Shooting/Skills','ShootingSkills'].includes(t)) return 'Skills';
+  if(['Shooting','ShootingSkills'].includes(t)) return 'Skills';
   if(t.length <= 12) return t;
   const first=t.split(/\s+/)[0];
   return first.length <= 12 ? first : t.slice(0,12);
@@ -1021,6 +1322,7 @@ function openEventDetail(encodedId){
     <div class="detail-row"><div class="detail-label">Type</div><div class="detail-value">${escapeHTML(typeLabel(e.type))}</div></div>
     <div class="detail-row"><div class="detail-label">Location</div><div class="detail-value">${escapeHTML(e.location || '—')}</div></div>
     <div class="detail-row"><div class="detail-label">Minutes</div><div class="detail-value">${escapeHTML(e.minutes || 0)}</div></div>
+    <div class="detail-row"><div class="detail-label">Status</div><div class="detail-value">${statusBadgeHTML(e.status || 'Planned')}</div></div>
     ${e.notes ? `<div class="detail-row"><div class="detail-label">Notes</div><div class="detail-value">${escapeHTML(e.notes)}</div></div>` : ''}
     <div class="detail-row"><div class="detail-label">Source</div><div class="detail-value">${escapeHTML(source)}</div></div>
   `;
@@ -1117,6 +1419,7 @@ function updateCompactHeader(name=getActiveViewName()){
   if(view) view.classList.add('active');
   renderAll();
   updateCompactHeader(name);
+  if(name === 'add') setTimeout(guardEventFormAutofill, 150);
 }
 function toggleLegend(){
   const card=document.getElementById('legendCard');
@@ -1141,7 +1444,7 @@ function renderDay(){
   ['selectedDayTitle','selectedDayTitleHome'].forEach(id=>document.getElementById(id).textContent=title);
   document.getElementById('awayNotice').innerHTML=awayNoticeHTML(selectedDate);
   document.getElementById('awayNoticeHome').innerHTML=awayNoticeHTML(selectedDate);
-  const html=events.length ? events.map(e=>eventCard(e)).join('') : '<div class="empty">No scheduled items for this day.</div>';
+  const html=events.length ? events.map(e=>trackerEventCard(e)).join('') : '<div class="empty">No scheduled items for this day.</div>';
   document.getElementById('dailySessions').innerHTML=html;
   document.getElementById('dailySessionsHome').innerHTML=html;
 }
@@ -1161,8 +1464,7 @@ function renderWeekList(){
   document.getElementById('weekListHome').innerHTML=grouped.join('') || '<div class="empty">No scheduled items in the next 7 days.</div>';
 }
 function renderWeekGrid(){
-  // Week tab should match the practical "week ahead" behavior: selected day + next 6 days.
-  // This avoids showing the previous calendar week when today is Sunday.
+  // Week tab should show the selected day + the next 6 days, not the previous calendar week.
   const start=parseLocalDate(selectedDate || todayLocalISO());
   const end=addDays(start,6);
   document.getElementById('weekTitle').textContent=`${formatDateHuman(toISODate(start))} – ${formatDateHuman(toISODate(end))}`;
@@ -1199,16 +1501,32 @@ function renderMonth(){
 function renderTotals(){
   const all=allSessions();
   const count=t=>all.filter(e=>normalizeType(e.type)===t).length;
-  document.getElementById('scheduledSkatesHome').textContent=count('Ice');
-  document.getElementById('scheduledStrengthHome').textContent=count('Workout');
-  document.getElementById('scheduledShootingHome').textContent=count('ShootingSkills');
-  document.getElementById('scheduledStickHome').textContent=count('Refereeing');
+  const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
+  set('scheduledSkatesHome',count('Ice'));
+  set('scheduledStrengthHome',count('Off-Ice'));
+  set('scheduledShootingHome',count('Shooting'));
+  set('scheduledStickHome',count('Stickhandling'));
+
+  const completed=all.filter(e=>normalizeEventStatus(e.status)==='Completed');
+  const skipped=all.filter(e=>normalizeEventStatus(e.status)==='Skipped');
+  const planned=all.filter(e=>normalizeEventStatus(e.status)==='Planned');
+  const tracked=completed.length + skipped.length;
+  const pct = tracked ? Math.round((completed.length / tracked) * 100) : 0;
+  const completedMinutes=completed.reduce((sum,e)=>sum+Number(e.minutes||0),0);
+  set('summaryCompleted', completed.length);
+  set('summaryPlanned', planned.length);
+  set('summarySkipped', skipped.length);
+  set('summaryCompletionPct', pct + '%');
+  set('summaryCompletedMinutes', completedMinutes);
+  set('summaryOnIce', completed.filter(e=>normalizeType(e.type)==='Ice').length);
+  set('summaryOff-Ice', completed.filter(e=>normalizeType(e.type)==='Off-Ice').length);
+  set('summarySkills', completed.filter(e=>normalizeType(e.type)==='Shooting').length);
+
   const allJournalEntries=combinedJournals();
-  document.getElementById('loggedMinutes').textContent=allJournalEntries.reduce((sum,j)=>sum+Number(j.minutes||0),0);
-  document.getElementById('journalEntries').textContent=allJournalEntries.length;
-  let awayDays=0; awayBlocks.forEach(b=>{awayDays += Math.floor((parseLocalDate(b.end)-parseLocalDate(b.start))/(24*60*60*1000))+1;});
-  document.getElementById('awayDays').textContent=awayDays;
-  document.getElementById('homeSkills').textContent=allJournalEntries.filter(j=>normalizeType(j.type)==='ShootingSkills').length;
+  set('journalEntries', allJournalEntries.length);
+  set('summaryJournalNeeded', completed.filter(e=>!journalForEvent(e.id)).length);
+  set('summaryGreatEffort', allJournalEntries.filter(j=>String(j.effort||'').toLowerCase()==='great').length);
+  set('summaryGoodEnergy', allJournalEntries.filter(j=>['good','great'].includes(String(j.energy||'').toLowerCase())).length);
 }
 function renderUpcoming(){
   const today=todayLocalISO();
@@ -1226,73 +1544,135 @@ function isJournalEvent(e){
   const loc=String(e.location || '').toLowerCase();
   return owner === 'cam' || start === 'logged' || loc.includes('training journal');
 }
+function sheetJournalToEntry(j){
+  return {
+    id:j.id || `journal-${j.eventId || ''}-${j.date || ''}`,
+    eventId:j.eventId || '',
+    date:j.date || selectedDate,
+    eventTitle:j.eventTitle || '',
+    eventType:j.eventType || j.type || '',
+    eventTime:j.eventTime || '',
+    whatWorkedOn:j.whatWorkedOn || j.note || '',
+    effort:j.effort || '',
+    energy:j.energy || '',
+    quickNote:j.quickNote || '',
+    addedBy:j.addedBy || 'Graycen',
+    createdAt:j.createdAt || '',
+    updatedAt:j.updatedAt || '',
+    source:'sheet'
+  };
+}
 function sheetEventToJournal(e){
   return {
     id:e.id || makeEventId(e.date,e.start,e.title),
+    eventId:e.eventId || '',
     date:e.date,
-    type:typeLabel(e.type),
-    minutes:Number(e.minutes || 0),
-    recovery:!!e.recovery || normalizeType(e.type)==='Recovery',
-    note:e.notes || e.title || '',
+    eventTitle:e.title || '',
+    eventType:typeLabel(e.type),
+    eventTime:formatEventTime(e) || '',
+    whatWorkedOn:e.notes || e.title || '',
+    effort:'',
+    energy:'',
+    quickNote:'',
+    addedBy:'Graycen',
     createdAt:e.createdAt || '',
     source:e.remote ? 'sheet' : 'local'
   };
 }
 function combinedJournals(){
-  const fromSheet = remoteEvents.map(normalizeEvent).filter(isJournalEvent).map(sheetEventToJournal);
-  const fromLocal = journals.map(j=>({...j, source:'local'}));
+  const fromJournalSheet = remoteJournals.map(sheetJournalToEntry);
+  const oldJournalEvents = remoteEvents.map(normalizeEvent).filter(isJournalEvent).map(sheetEventToJournal);
+  const fromLocal = journals.map(j=>({...j, source:j.source || 'local'}));
   const byId = new Map();
-  [...fromSheet, ...fromLocal].forEach(j=>{
-    const key = String(j.id || `${j.date}|${j.type}|${j.minutes}|${j.note}`);
+  [...fromJournalSheet, ...oldJournalEvents, ...fromLocal].forEach(j=>{
+    const key = String(j.id || `${j.eventId}|${j.date}|${j.whatWorkedOn}|${j.quickNote}`);
     if(!byId.has(key)) byId.set(key,j);
   });
   return [...byId.values()].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')) || String(b.createdAt||'').localeCompare(String(a.createdAt||'')));
 }
-function saveJournalEntry(){
-  const note=document.getElementById('journalNote').value.trim();
+function clearJournalForm(){
+  currentJournalEvent = null;
+  const today = selectedDate || todayLocalISO();
+  const setVal=(id,val)=>{const el=document.getElementById(id); if(el) el.value=val;};
+  setVal('journalDate', today);
+  setVal('journalEventId','');
+  setVal('journalEventTitle','');
+  setVal('journalEventType','');
+  setVal('journalEventTime','');
+  setVal('journalWorkedOn','');
+  setVal('journalEffort','');
+  setVal('journalEnergy','');
+  setVal('journalQuickNote','');
+  const title=document.getElementById('journalContextTitle'); if(title) title.textContent='Select an event from Home or Day';
+  const meta=document.getElementById('journalContextMeta'); if(meta) meta.textContent='Tap Journal on an event card to connect this entry to that session.';
+  const formTitle=document.getElementById('journalFormTitle'); if(formTitle) formTitle.textContent='Journal Entry';
+}
+async function saveJournalEntry(){
+  const workedOn=document.getElementById('journalWorkedOn').value.trim();
+  const effort=document.getElementById('journalEffort').value;
+  const energy=document.getElementById('journalEnergy').value;
+  const quickNote=document.getElementById('journalQuickNote').value.trim();
+  if(!workedOn){ alert('Please enter what Graycen worked on.'); return; }
   const entry={
-    id:'journal-'+Date.now(), date:document.getElementById('journalDate').value || selectedDate,
-    type:document.getElementById('journalType').value, minutes:Number(document.getElementById('journalMinutes').value || 0),
-    recovery:document.getElementById('journalRecovery').checked, note, createdAt:new Date().toISOString()
+    id:'journal-'+Date.now()+'-'+Math.floor(Math.random()*100000),
+    eventId:document.getElementById('journalEventId').value || '',
+    date:document.getElementById('journalDate').value || selectedDate,
+    eventTitle:document.getElementById('journalEventTitle').value || '',
+    eventType:document.getElementById('journalEventType').value || '',
+    eventTime:document.getElementById('journalEventTime').value || '',
+    whatWorkedOn:workedOn,
+    effort,
+    energy,
+    quickNote,
+    addedBy:'Graycen',
+    createdAt:new Date().toISOString(),
+    updatedAt:new Date().toISOString()
   };
   journals.unshift(entry); saveJournals();
-  const sheetEvent=normalizeEvent({id:entry.id, date:entry.date, type:entry.type, start:'Logged', end:'', title:note || entry.type, location:'Training journal', owner:'Will', minutes:entry.minutes, notes:JSON.stringify({owner:'Will', note:note, recovery:entry.recovery, minutes:entry.minutes})});
-  postEventToSheet(sheetEvent).then(()=>loadRemoteEvents());
-  document.getElementById('journalMinutes').value=''; document.getElementById('journalNote').value=''; document.getElementById('journalRecovery').checked=false;
-  renderAll(); alert('Journal entry saved.');
+  renderAll();
+  await postJournalToSheet(entry);
+  setTimeout(loadRemoteJournals, 900);
+  clearJournalForm();
+  alert('Journal entry saved.');
 }
 function journalCard(j){
-  const cls = typeClass(j.type);
-  const note = String(j.note || '').trim();
-  const title = note || typeLabel(j.type) || 'Journal entry';
-  const recovery = j.recovery ? ' · Recovery completed' : '';
+  const cls = typeClass(j.eventType || j.type);
+  const worked = String(j.whatWorkedOn || j.note || '').trim();
+  const title = j.eventTitle || worked || 'Journal entry';
+  const metaParts = [formatDateHuman(j.date)];
+  if(j.eventTime) metaParts.push(j.eventTime);
+  if(j.effort) metaParts.push('Effort: '+j.effort);
+  if(j.energy) metaParts.push('Energy: '+j.energy);
   return `<div class="journal-entry-card">
     <div>
-      <div class="journal-top"><span class="journal-pill ${cls}">${escapeHTML(typeLabel(j.type))}</span><span class="journal-tag">Journal</span></div>
+      <div class="journal-top"><span class="journal-pill ${cls}">${escapeHTML(typeLabel(j.eventType || j.type || 'Other'))}</span><span class="journal-tag">Journal</span></div>
       <div class="journal-title">${escapeHTML(title)}</div>
-      <div class="journal-meta">${escapeHTML(formatDateHuman(j.date))} · Logged${recovery}</div>
-      ${note ? `<div class="journal-note">${escapeHTML(note)}</div>` : ''}
+      <div class="journal-meta">${escapeHTML(metaParts.join(' · '))}</div>
+      ${worked ? `<div class="journal-note"><strong>Worked on:</strong> ${escapeHTML(worked)}</div>` : ''}
+      ${j.quickNote ? `<div class="journal-note">${escapeHTML(j.quickNote)}</div>` : ''}
     </div>
-    <div class="minute-badge"><strong>${Number(j.minutes||0)}</strong><span>min</span></div>
+    <div class="minute-badge"><strong>${j.effort ? escapeHTML(j.effort[0]) : '—'}</strong><span>effort</span></div>
   </div>`;
 }
 function compactJournalRow(j){
-  const cls = typeClass(j.type);
-  const note = String(j.note || '').trim();
-  const recovery = j.recovery ? ' · Recovery' : '';
+  const cls = typeClass(j.eventType || j.type);
+  const worked = String(j.whatWorkedOn || j.note || '').trim();
+  const title = j.eventTitle || typeLabel(j.eventType || j.type) || 'Journal';
+  const ratings=[]; if(j.effort) ratings.push('Effort '+j.effort); if(j.energy) ratings.push('Energy '+j.energy);
   return `<div class="compact-journal-row ${cls}">
-    <div class="compact-top"><span>${escapeHTML(formatDateHuman(j.date))} · ${escapeHTML(typeLabel(j.type))}${recovery}</span><span>${Number(j.minutes||0)} min</span></div>
-    ${note ? `<div class="compact-note">${escapeHTML(note)}</div>` : ''}
+    <div class="compact-top"><span>${escapeHTML(formatDateHuman(j.date))} · ${escapeHTML(title)}</span><span>${escapeHTML(ratings.join(' · '))}</span></div>
+    ${worked ? `<div class="compact-note">${escapeHTML(worked)}</div>` : ''}
+    ${j.quickNote ? `<div class="compact-note">${escapeHTML(j.quickNote)}</div>` : ''}
   </div>`;
 }
 function renderJournals(){
   const allJournals=combinedJournals();
   const cards=allJournals.slice(0,40).map(compactJournalRow).join('');
   const journalHtml=cards ? `<div class="compact-journal-list">${cards}</div>` : '<div class="empty">No journal entries yet.</div>';
-  const summaryRows=allJournals.slice(0,40).map(compactJournalRow).join('');
+  const summaryRows=allJournals.slice(0,20).map(compactJournalRow).join('');
   const summaryHtml=summaryRows ? `<div class="compact-journal-list">${summaryRows}</div>` : '<div class="empty">No journal entries yet.</div>';
-  document.getElementById('journalHistory').innerHTML=journalHtml;
-  document.getElementById('journalHistorySummary').innerHTML=summaryHtml;
+  const jh=document.getElementById('journalHistory'); if(jh) jh.innerHTML=journalHtml;
+  const js=document.getElementById('journalHistorySummary'); if(js) js.innerHTML=summaryHtml;
 }
 
 function loadLocalAddedEvents(){
@@ -1311,13 +1691,24 @@ async function loadRemoteEvents(){
     const rows = Array.isArray(data) ? data : (data.events || data.data || data.rows || []);
     remoteEvents = rows.map(r=>normalizeEvent({...r, remote:true})).filter(e => !isDuplicateAwayEvent(e));
     remoteLoadedSuccessfully = true;
-    localAddedEvents = [];
-    saveLocalAddedEvents();
+    // Keep local pending events so newly added items remain visible while the Sheet catches up.
     status.textContent = remoteEvents.length ? `Shared schedule loaded: ${remoteEvents.length} item(s).` : 'Shared schedule connected. No added Sheet items found.';
   }catch(e){
     remoteLoadedSuccessfully = false;
     console.warn('Shared schedule load failed', e);
     status.textContent = 'Using built-in schedule. Shared Sheet did not load in this browser.';
+  }
+  renderAll();
+  loadRemoteJournals();
+}
+async function loadRemoteJournals(){
+  try{
+    const res=await fetch(`${SHEET_WEB_APP_URL}?action=listJournals&v=${Date.now()}`, {cache:'no-store'});
+    const data=await res.json();
+    remoteJournals = Array.isArray(data) ? data : (data.journals || data.data || data.rows || []);
+  }catch(e){
+    console.warn('Journal load failed', e);
+    remoteJournals = [];
   }
   renderAll();
 }
@@ -1326,6 +1717,7 @@ async function postEventToSheet(e, action='addEvent'){
   payload.set('action',action);
   payload.set('id',e.id);
   payload.set('date',e.date);
+  payload.set('time',e.start);
   payload.set('startTime',e.start);
   payload.set('endTime',e.end);
   payload.set('start',e.start);
@@ -1336,11 +1728,93 @@ async function postEventToSheet(e, action='addEvent'){
   payload.set('notes',e.notes || '');
   payload.set('addedBy',e.owner || 'Parent');
   payload.set('minutes',String(e.minutes || 0));
-  payload.set('createdAt',new Date().toISOString());
+  payload.set('status', normalizeEventStatus(e.status || 'Planned'));
+  payload.set('updatedAt', new Date().toISOString());
+  payload.set('createdAt', e.createdAt || new Date().toISOString());
   try{
     await fetch(SHEET_WEB_APP_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}, body:payload.toString()});
     return true;
   }catch(err){ console.warn('Sheet save failed',err); return false; }
+}
+async function postJournalToSheet(j){
+  const payload=new URLSearchParams();
+  payload.set('action','addJournal');
+  payload.set('id',j.id);
+  payload.set('eventId',j.eventId || '');
+  payload.set('date',j.date || '');
+  payload.set('eventTitle',j.eventTitle || '');
+  payload.set('eventType',j.eventType || '');
+  payload.set('eventTime',j.eventTime || '');
+  payload.set('whatWorkedOn',j.whatWorkedOn || '');
+  payload.set('effort',j.effort || '');
+  payload.set('energy',j.energy || '');
+  payload.set('quickNote',j.quickNote || '');
+  payload.set('addedBy',j.addedBy || 'Graycen');
+  payload.set('createdAt',j.createdAt || new Date().toISOString());
+  payload.set('updatedAt',new Date().toISOString());
+  try{
+    await fetch(SHEET_WEB_APP_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}, body:payload.toString()});
+    return true;
+  }catch(err){ console.warn('Journal sync failed',err); return false; }
+}
+async function postStatusToSheet(e, status){
+  const payload=new URLSearchParams();
+  payload.set('action','updateStatus');
+  payload.set('id',e.id);
+  payload.set('status',normalizeEventStatus(status));
+  payload.set('updatedAt',new Date().toISOString());
+  try{
+    await fetch(SHEET_WEB_APP_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'}, body:payload.toString()});
+    return true;
+  }catch(err){ console.warn('Status sync failed',err); return false; }
+}
+function applyStatusLocally(id,status){
+  const clean=normalizeEventStatus(status);
+  const touch=e=>{ if(String(e.id)===String(id)){ e.status=clean; e.updatedAt=new Date().toISOString(); } return e; };
+  remoteEvents=remoteEvents.map(touch);
+  localAddedEvents=localAddedEvents.map(touch);
+  sessions=sessions.map(touch);
+  saveLocalAddedEvents();
+}
+async function markEventStatus(encodedId,status){
+  const id=decodeURIComponent(encodedId || '');
+  const e=allSessions().find(item=>String(item.id)===String(id));
+  if(!e){ alert('Could not find this event. Please refresh and try again.'); return; }
+  const clean=normalizeEventStatus(status);
+  applyStatusLocally(id, clean);
+  renderAll();
+  await postStatusToSheet(e, clean);
+  setTimeout(loadRemoteEvents, 700);
+}
+function openJournalForEvent(encodedId){
+  const id=decodeURIComponent(encodedId || '');
+  const e=allSessions().find(item=>String(item.id)===String(id));
+  showView('journal');
+  if(!e) return;
+  currentJournalEvent = {...e};
+  const time=formatEventTime(e) || 'All Day';
+  const setVal=(id,val)=>{const el=document.getElementById(id); if(el) el.value=val;};
+  setVal('journalDate', e.date || selectedDate);
+  setVal('journalEventId', e.id || '');
+  setVal('journalEventTitle', e.title || '');
+  setVal('journalEventType', typeLabel(e.type));
+  setVal('journalEventTime', time);
+  setVal('journalWorkedOn','');
+  setVal('journalEffort','');
+  setVal('journalEnergy','');
+  setVal('journalQuickNote','');
+  const ctxTitle=document.getElementById('journalContextTitle'); if(ctxTitle) ctxTitle.textContent=e.title || 'Selected event';
+  const ctxMeta=document.getElementById('journalContextMeta'); if(ctxMeta) ctxMeta.textContent=`${formatLongDate(e.date)} · ${time}${e.location ? ' · '+e.location : ''}`;
+  const formTitle=document.getElementById('journalFormTitle'); if(formTitle) formTitle.textContent='Journal for This Event';
+  const existing=journalForEvent(e.id);
+  if(existing){
+    setVal('journalWorkedOn', existing.whatWorkedOn || '');
+    setVal('journalEffort', existing.effort || '');
+    setVal('journalEnergy', existing.energy || '');
+    setVal('journalQuickNote', existing.quickNote || '');
+  }
+  const worked=document.getElementById('journalWorkedOn');
+  setTimeout(()=>{ if(worked) worked.focus({preventScroll:false}); },80);
 }
 function timeFromParts(prefix){
   const h=document.getElementById(prefix+'Hour').value;
@@ -1349,13 +1823,27 @@ function timeFromParts(prefix){
   if(!h || !m || !ap) return '';
   return `${h}:${m} ${ap}`;
 }
-function addOneHourToTimeLabel(value){
+function defaultDurationForType(type){
+  const t=normalizeType(type || document.getElementById('eventType')?.value || 'Other');
+  if(t === 'ShootingSkills') return 45;
+  if(t === 'Recovery') return 30;
+  if(t === 'Work') return 120;
+  return 60;
+}
+function addMinutesToTimeLabel(value, minutes){
   const mins=timeToMinutes(value);
   if(mins === null || mins < 0) return '';
-  return minutesToTimeLabel((mins + 60) % (24*60));
+  return minutesToTimeLabel((mins + Number(minutes || 60)) % (24*60));
 }
 function hasTimeParts(prefix){
   return !!(document.getElementById(prefix+'Hour').value && document.getElementById(prefix+'Minute').value && document.getElementById(prefix+'AmPm').value);
+}
+function setAddEventStatus(message, kind=''){
+  const el=document.getElementById('addEventStatus');
+  if(!el) return;
+  el.textContent=message;
+  el.classList.remove('success','error');
+  if(kind) el.classList.add(kind);
 }
 function toggleAllDayEvent(){
   const allDay = !!document.getElementById('eventAllDay')?.checked;
@@ -1363,12 +1851,24 @@ function toggleAllDayEvent(){
   ['eventStartHour','eventStartMinute','eventStartAmPm','eventEndHour','eventEndMinute','eventEndAmPm'].forEach(id=>{const el=document.getElementById(id); if(el) el.disabled = allDay;});
   updateMinutesDisplay();
 }
-function maybeDefaultEndTime(){
+function maybeDefaultEndTime(force=false){
   const allDay = !!document.getElementById('eventAllDay')?.checked;
   if(allDay) return;
   const start = timeFromParts('eventStart');
   if(!start) { updateMinutesDisplay(); return; }
-  if(!hasTimeParts('eventEnd')) setTimeParts('eventEnd', addOneHourToTimeLabel(start));
+
+  // Add mode: auto-fill the end time once the start time is complete.
+  // Edit mode: when the start time changes, shift the end time forward by the event's original duration
+  // unless the user has already manually changed the end time.
+  if(editingEventId){
+    const duration = editingEventOriginalMinutes || defaultDurationForType();
+    if(force || !userAdjustedEndTime){
+      setTimeParts('eventEnd', addMinutesToTimeLabel(start, duration));
+    }
+  } else if(force || !hasTimeParts('eventEnd')){
+    setTimeParts('eventEnd', addMinutesToTimeLabel(start, defaultDurationForType()));
+  }
+
   updateMinutesDisplay();
 }
 function updateMinutesDisplay(){
@@ -1379,14 +1879,33 @@ function updateMinutesDisplay(){
   const mins=calcMinutes(start,end);
   el.textContent = start && end ? `${mins} minutes` : 'Choose start and end times';
 }
+function updateEventFormMode(e=null){
+  const isEdit = !!editingEventId;
+  document.body.classList.toggle('editing-event-active', isEdit);
+  const addTab=document.querySelector('.tab[data-view="add"]'); if(addTab) addTab.textContent = isEdit ? 'EDITING' : 'Add Event';
+  const card=document.getElementById('eventFormCard'); if(card) card.classList.toggle('edit-mode', isEdit);
+  const mode=document.getElementById('eventFormModeLabel'); if(mode) mode.textContent = isEdit ? 'EDIT MODE — EXISTING EVENT' : 'Parent calendar';
+  const heading=document.getElementById('eventFormTitle'); if(heading) heading.textContent = isEdit ? 'Edit Scheduled Item' : 'Add a scheduled item';
+  const help=document.getElementById('eventFormHelp'); if(help) help.textContent = isEdit ? 'Red edit mode means you are changing one existing event only. Press Save Changes or Cancel Edit.' : 'Added events save locally right away and are also sent to the shared Google Sheet.';
+  const btn=document.getElementById('saveEventButton'); if(btn) btn.textContent = isEdit ? 'Save Changes to This Event' : 'Add To Calendar';
+  const cancel=document.getElementById('cancelEditButton'); if(cancel) cancel.style.display = isEdit ? 'block' : 'none';
+  const skip=document.getElementById('skipEventButton'); if(skip) skip.style.display = isEdit ? 'none' : 'block';
+  const repeatBox=document.getElementById('repeatBox'); if(repeatBox) repeatBox.style.display = isEdit ? 'none' : 'grid';
+  const editName=document.getElementById('editModeEventName'); if(editName) editName.textContent = e && e.title ? e.title : '—';
+  const editMeta=document.getElementById('editModeEventMeta'); if(editMeta) editMeta.textContent = e && e.date ? `${formatLongDate(e.date)}${formatEventTime(e) ? ' · '+formatEventTime(e) : ''}` : 'Changes will update this one event only.';
+}
 function clearEventForm(){
   editingEventId='';
-  document.getElementById('eventTitle').value='';
-  document.getElementById('eventLocation').value='';
+  editingEventOriginalMinutes = 0;
+  userAdjustedEndTime = false;
+  const titleInput=document.getElementById('eventTitle'); if(titleInput){ titleInput.value=''; titleInput.setAttribute('autocomplete','off'); }
+  const locInput=document.getElementById('eventLocation'); if(locInput){ locInput.value=''; locInput.setAttribute('autocomplete','off'); }
   const allDayEl=document.getElementById('eventAllDay'); if(allDayEl) allDayEl.checked=false;
   ['eventStartHour','eventStartMinute','eventStartAmPm','eventEndHour','eventEndMinute','eventEndAmPm'].forEach(id=>{const el=document.getElementById(id); if(el) el.value='';});
-  const btn=document.getElementById('saveEventButton'); if(btn) btn.textContent='Add To Calendar';
-  const cancel=document.getElementById('cancelEditButton'); if(cancel) cancel.style.display='none';
+  const repeat=document.getElementById('eventRepeat'); if(repeat) repeat.value='none';
+  const repeatCount=document.getElementById('eventRepeatCount'); if(repeatCount) repeatCount.value='1';
+  const repeatUntil=document.getElementById('eventRepeatUntil'); if(repeatUntil) repeatUntil.value='';
+  updateEventFormMode(null);
   toggleAllDayEvent();
 }
 function setTimeParts(prefix, value){
@@ -1404,6 +1923,8 @@ function startEditSelectedEvent(){
   if(!e){ alert('Could not find this event to edit. Please refresh and try again.'); return; }
   closeEventDetail();
   editingEventId=e.id || makeEventId(e.date,e.start,e.title);
+  editingEventOriginalMinutes = Number(e.minutes || calcMinutes(e.start, e.end, e.date) || defaultDurationForType());
+  userAdjustedEndTime = false;
   showView('add');
   const dateEl=document.getElementById('eventDate'); if(dateEl) dateEl.value=e.date || selectedDate;
   const typeEl=document.getElementById('eventType'); if(typeEl) typeEl.value=normalizeType(e.type);
@@ -1415,40 +1936,116 @@ function startEditSelectedEvent(){
   setTimeParts('eventStart', e.start);
   setTimeParts('eventEnd', e.end);
   toggleAllDayEvent();
-  const btn=document.getElementById('saveEventButton'); if(btn) btn.textContent='Save Changes';
-  const cancel=document.getElementById('cancelEditButton'); if(cancel) cancel.style.display='block';
+  const repeat=document.getElementById('eventRepeat'); if(repeat) repeat.value='none';
+  const repeatCount=document.getElementById('eventRepeatCount'); if(repeatCount) repeatCount.value='1';
+  const repeatUntil=document.getElementById('eventRepeatUntil'); if(repeatUntil) repeatUntil.value='';
+  updateEventFormMode(e);
   updateMinutesDisplay();
+  setAddEventStatus('Editing existing event. Press Save Changes when finished, or Cancel Edit to return to Add mode.');
   setTimeout(()=>{
     const addView=document.getElementById('view-add');
     if(addView) addView.scrollIntoView({behavior:'smooth', block:'start'});
     if(titleEl) titleEl.focus({preventScroll:true});
   }, 80);
 }
-function cancelEditEvent(){clearEventForm();}
-function saveScheduledEvent(){
-  const date=document.getElementById('eventDate').value || selectedDate;
-  const title=document.getElementById('eventTitle').value.trim();
-  if(!date || !title){alert('Please enter a date and title.'); return;}
+function cancelEditEvent(){clearEventForm(); setAddEventStatus('Edit cancelled.');}
+function repeatDatesFromForm(startIso){
+  const repeat=document.getElementById('eventRepeat')?.value || 'none';
+  const rawCount=Number(document.getElementById('eventRepeatCount')?.value || 1);
+  const maxCount=Math.min(Math.max(Number.isFinite(rawCount) ? rawCount : 1, 1), 60);
+  const until=document.getElementById('eventRepeatUntil')?.value || '';
+  const dates=[];
+  let d=parseLocalDate(startIso);
+  if(!d) return [startIso];
+  let guard=0;
+  while(dates.length < maxCount && guard < 400){
+    const iso=toISODate(d);
+    if(!until || iso <= until) dates.push(iso);
+    else break;
+    if(repeat === 'none') break;
+    if(repeat === 'daily') d=addDays(d,1);
+    else if(repeat === 'weekly') d=addDays(d,7);
+    else if(repeat === 'weekdays'){
+      do { d=addDays(d,1); } while(d.getDay()===0 || d.getDay()===6);
+    } else break;
+    guard++;
+  }
+  return dates.length ? dates : [startIso];
+}
+function buildEventFromForm(date, statusOverride, index=0){
   const allDay = !!document.getElementById('eventAllDay')?.checked;
   const start = allDay ? 'All Day' : timeFromParts('eventStart');
   const end = allDay ? '' : timeFromParts('eventEnd');
-  if(!allDay && (!start || !end)){ alert('Please choose a start and end time, or select All-day event.'); return; }
-  const e=normalizeEvent({id:editingEventId || 'local-'+Date.now(), date, type:normalizeType(document.getElementById('eventType').value), start, end, title, location:document.getElementById('eventLocation').value.trim(), owner:'Parent', minutes: allDay ? 0 : calcMinutes(start,end)});
-  if(editingEventId){
-    localAddedEvents = localAddedEvents.filter(item=>String(item.id)!==String(editingEventId));
-    remoteEvents = remoteEvents.map(item=>String(item.id)===String(editingEventId) ? e : item);
-    sessions = sessions.map(item=>String(item.id)===String(editingEventId) ? e : item);
-    localAddedEvents.push(e);
-    saveLocalAddedEvents();
-    renderAll();
-    postEventToSheet(e, 'updateEvent').then(()=>loadRemoteEvents());
-    alert('Event changes saved.');
-  } else {
-    localAddedEvents.push(e); saveLocalAddedEvents(); renderAll();
-    postEventToSheet(e, 'addEvent').then(()=>loadRemoteEvents());
-    alert('Event added.');
+  const title=document.getElementById('eventTitle').value.trim();
+  const type=document.getElementById('eventType').value;
+  const id = editingEventId || `event-${Date.now()}-${index}-${Math.floor(Math.random()*100000)}`;
+  return normalizeEvent({
+    id,
+    date,
+    type,
+    start,
+    end,
+    title,
+    location:document.getElementById('eventLocation').value.trim(),
+    owner:'Parent',
+    minutes: allDay ? 0 : calcMinutes(start,end,date),
+    status: normalizeEventStatus(statusOverride || 'Planned'),
+    createdAt:new Date().toISOString(),
+    updatedAt:new Date().toISOString(),
+    localOverride:true
+  });
+}
+async function saveScheduledEvent(statusOverride){
+  const date=document.getElementById('eventDate').value || selectedDate;
+  const title=document.getElementById('eventTitle').value.trim();
+  const allDay = !!document.getElementById('eventAllDay')?.checked;
+  const start = allDay ? 'All Day' : timeFromParts('eventStart');
+  const end = allDay ? '' : timeFromParts('eventEnd');
+  if(!date || !title){ setAddEventStatus('Please enter a date and title.', 'error'); return; }
+  if(!allDay && (!start || !end)){ setAddEventStatus('Please choose a start and end time, or select All-day event.', 'error'); return; }
+  const repeat=document.getElementById('eventRepeat')?.value || 'none';
+  if(editingEventId && repeat !== 'none'){
+    setAddEventStatus('Edits can only update one event. Set Repeat to “Does not repeat” and try again.', 'error');
+    return;
   }
-  clearEventForm();
+  const status=normalizeEventStatus(statusOverride || 'Planned');
+  const dates = editingEventId ? [date] : repeatDatesFromForm(date);
+  const events = dates.map((iso,i)=>buildEventFromForm(iso,status,i));
+  const saveBtn=document.getElementById('saveEventButton');
+  const skipBtn=document.getElementById('skipEventButton');
+  if(saveBtn) saveBtn.disabled=true;
+  if(skipBtn) skipBtn.disabled=true;
+  setAddEventStatus(`Saving ${events.length} item${events.length===1?'':'s'}…`);
+  try{
+    if(editingEventId){
+      const e=events[0];
+      localAddedEvents = localAddedEvents.filter(item=>String(item.id)!==String(editingEventId));
+      remoteEvents = remoteEvents.map(item=>String(item.id)===String(editingEventId) ? e : item);
+      sessions = sessions.map(item=>String(item.id)===String(editingEventId) ? e : item);
+      localAddedEvents.push(e);
+      saveLocalAddedEvents();
+      selectedDate=e.date;
+      renderAll();
+      await postEventToSheet(e, 'updateEvent');
+      setAddEventStatus('Event changes saved. Refresh in a few seconds if the Sheet is slow to update.', 'success');
+    } else {
+      localAddedEvents.push(...events);
+      saveLocalAddedEvents();
+      selectedDate=events[0].date;
+      const d=parseLocalDate(selectedDate); if(d) displayMonth=new Date(d.getFullYear(), d.getMonth(), 1, 12, 0, 0, 0);
+      renderAll();
+      for(const e of events){ await postEventToSheet(e, 'addEvent'); }
+      setAddEventStatus(`Added ${events.length} item${events.length===1?'':'s'}${status==='Skipped'?' as Skipped':''}.`, 'success');
+    }
+    clearEventForm();
+    setTimeout(loadRemoteEvents, 2200);
+  }catch(err){
+    console.warn('Save event failed', err);
+    setAddEventStatus('Could not save to the shared Sheet. The item is shown locally for now. Try refreshing or check the Apps Script deployment.', 'error');
+  }finally{
+    if(saveBtn) saveBtn.disabled=false;
+    if(skipBtn) skipBtn.disabled=false;
+  }
 }
 async function deleteSelectedEvent(){
   const e=allSessions().find(item => String(item.id) === String(currentDetailEventId));
@@ -1475,25 +2072,43 @@ async function deleteSelectedEvent(){
 function exportDashboardData(){
   const data=JSON.stringify({version:DASHBOARD_VERSION, localAddedEvents, journals}, null, 2);
   const blob=new Blob([data],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a');
-  a.href=url; a.download='will-training-dashboard-backup.json'; a.click(); URL.revokeObjectURL(url);
+  a.href=url; a.download='graycen-training-dashboard-backup.json'; a.click(); URL.revokeObjectURL(url);
 }
 function resetDashboardData(){
   if(confirm('This will delete journal entries and locally added events saved on this device. Continue?')){
-    localAddedEvents=[]; journals=[]; deletedEventIds=[]; saveLocalAddedEvents(); saveDeletedEventIds(); saveJournals(); renderAll();
+    localAddedEvents=[]; journals=[]; remoteJournals=[]; deletedEventIds=[]; saveLocalAddedEvents(); saveDeletedEventIds(); saveJournals(); renderAll();
   }
 }
 
 function fillHourSelects(){
-  ['eventStartHour','eventEndHour'].forEach(id=>{const sel=document.getElementById(id); for(let i=1;i<=12;i++){const o=document.createElement('option');o.value=String(i);o.textContent=String(i);sel.appendChild(o);}});
-  ['eventStartHour','eventStartMinute','eventStartAmPm'].forEach(id=>document.getElementById(id).addEventListener('change',maybeDefaultEndTime));
-  ['eventEndHour','eventEndMinute','eventEndAmPm'].forEach(id=>document.getElementById(id).addEventListener('change',updateMinutesDisplay));
+  ['eventStartHour','eventEndHour'].forEach(id=>{const sel=document.getElementById(id); if(!sel) return; for(let i=1;i<=12;i++){const o=document.createElement('option');o.value=String(i);o.textContent=String(i);sel.appendChild(o);}});
+  ['eventStartHour','eventStartMinute','eventStartAmPm'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('change',()=>maybeDefaultEndTime(false));});
+  ['eventEndHour','eventEndMinute','eventEndAmPm'].forEach(id=>{const el=document.getElementById(id); if(el) el.addEventListener('change',()=>{ userAdjustedEndTime = true; updateMinutesDisplay(); });});
+  const typeEl=document.getElementById('eventType'); if(typeEl) typeEl.addEventListener('change',()=>{ if(!editingEventId) maybeDefaultEndTime(true); else updateMinutesDisplay(); });
+  const repeatEl=document.getElementById('eventRepeat'); if(repeatEl) repeatEl.addEventListener('change',()=>{
+    const count=document.getElementById('eventRepeatCount');
+    if(count && repeatEl.value==='none') count.value='1';
+    if(count && repeatEl.value!=='none' && Number(count.value||1)<2) count.value='3';
+  });
   toggleAllDayEvent();
+}
+
+function guardEventFormAutofill(){
+  const title=document.getElementById('eventTitle');
+  const loc=document.getElementById('eventLocation');
+  if(!editingEventId){
+    // Chrome sometimes tries to reuse old birthday/location values. Keep blank fields blank in Add mode.
+    if(title && /birthday/i.test(title.value || '')) title.value='';
+    if(loc && /^home$/i.test(loc.value || '')) loc.value='';
+  }
 }
 function init(){
   fillHourSelects();
+  ['eventTitle','eventLocation'].forEach(id=>{const el=document.getElementById(id); if(el){ el.setAttribute('autocomplete','off'); el.addEventListener('focus', guardEventFormAutofill); }});
   const today=todayLocalISO();
   selectedDate=today; displayMonth=parseLocalDate(today);
   ['selectedDate','selectedDateDay','journalDate','eventDate'].forEach(id=>{const el=document.getElementById(id); if(el) el.value=today;});
+  updateEventFormMode(null);
   renderAll(); loadRemoteEvents();
 }
 window.addEventListener('DOMContentLoaded', init);
