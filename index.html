@@ -3,40 +3,40 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#082345" />
+  <meta name="theme-color" content="#15110a" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="Graycen Training" />
+  <meta name="apple-mobile-web-app-title" content="Will Hockey" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <title>Graycen Summer Training Dashboard</title>
-  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=mission-icon-3">
-  <link rel="icon" type="image/png" href="apple-touch-icon.png?v=mission-icon-3">
+  <title>Will Summer Training Dashboard</title>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=will-icon-1">
+  <link rel="icon" type="image/png" href="apple-touch-icon.png?v=will-icon-1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#ffffff;
-      --ink:#111111;
-      --muted:#646464;
-      --soft:#f6f6f4;
-      --soft2:#fbfbfa;
-      --line:#deded8;
-      --warm:#123d2a;
-      --warm2:#1f5a3f;
-      --ice:#39ff14;
-      --ice-soft:#eaffea;
-      --ice-ink:#0a3b05;
+      --bg:#f8f5ec;
+      --ink:#101828;
+      --muted:#667085;
+      --soft:#f8fafc;
+      --soft2:#ffffff;
+      --line:#e3dccb;
+      --warm:#15110a;
+      --warm2:#b48618;
+      --ice:#1e9bf0;
+      --ice-soft:#eaf6ff;
+      --ice-ink:#15110a;
       --strength:#8b5cf6;
       --strength-soft:#f1eaff;
       --recovery:#20c997;
       --recovery-soft:#e7fff7;
       --shooting:#f97316;
       --shooting-soft:#fff0df;
-      --stick:#f4c430;
-      --stick-soft:#fff7d8;
+      --work:#f4c430;
+      --work-soft:#fff7d8;
       --away:#ef4444;
       --away-soft:#ffe9e9;
       --journal:#f2ebff;
@@ -57,10 +57,10 @@
     button,input,select,textarea{font:inherit}
     .wrap{max-width:1120px;margin:0 auto;padding:18px}
     .hero{
-      background:linear-gradient(135deg,#0f2f21 0%,#17452f 70%,#10291f 100%);
+      background:linear-gradient(135deg,#071a33 0%,#15110a 58%,#b48618 100%);
       color:#fff;border-radius:30px;padding:24px;margin-bottom:14px;position:relative;overflow:hidden;box-shadow:var(--shadow)
     }
-    .hero:before{content:"";position:absolute;right:-90px;top:-120px;width:320px;height:320px;border-radius:50%;background:rgba(57,255,20,.16);filter:blur(2px)}
+    .hero:before{content:"";position:absolute;right:-90px;top:-120px;width:320px;height:320px;border-radius:50%;background:rgba(244,196,48,.20);filter:blur(2px)}
     .hero-inner{position:relative;z-index:1}
     .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:22px;align-items:center}
     .hero-main{display:flex;gap:18px;align-items:center}
@@ -75,7 +75,7 @@
     .hero-tool{border:1px solid rgba(255,255,255,.20);background:rgba(255,255,255,.10);border-radius:16px;padding:12px 12px;text-align:center}
     .hero-tool span{display:block;color:var(--ice);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
     .hero-tool strong{font-size:14px;color:#fff}
-    .next-card{background:#fff;border:3px solid rgba(57,255,20,.75);border-radius:22px;padding:18px 20px;display:grid;gap:6px;color:#101828;box-shadow:0 12px 30px rgba(0,0,0,.18)}
+    .next-card{background:#fff;border:3px solid rgba(244,196,48,.90);border-radius:22px;padding:18px 20px;display:grid;gap:6px;color:#101828;box-shadow:0 12px 30px rgba(0,0,0,.18)}
     .next-card .label{color:var(--warm2);text-transform:uppercase;font-weight:900;font-size:12px;letter-spacing:.08em}
     .next-card .title{font-size:28px;font-weight:900;line-height:1.05;color:#111827}
     .next-card .meta{color:#4b5563;font-size:15px;line-height:1.35;font-weight:750}
@@ -88,7 +88,7 @@
     .legend-card.collapsed .legend-body{display:none}
     .pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:7px 10px;font-size:12px;font-weight:900;white-space:nowrap}
     .dot{width:10px;height:10px;border-radius:999px;display:inline-block;background:#bbb}
-    .dot.ice{background:var(--ice)} .dot.strength{background:var(--strength)} .dot.shooting{background:var(--shooting)} .dot.stick{background:var(--stick)} .dot.recovery{background:var(--recovery)} .dot.away{background:var(--away)} .dot.other{background:#8b8b8b}
+    .dot.ice{background:var(--ice)} .dot.strength{background:var(--strength)} .dot.shooting{background:var(--shooting)} .dot.work{background:var(--work)} .dot.recovery{background:var(--recovery)} .dot.away{background:var(--away)} .dot.other{background:#8b8b8b}
     main{display:block}
     .view{display:none}
     .view.active{display:block}
@@ -113,7 +113,7 @@
     .event.ice{border-left-color:var(--ice);background:linear-gradient(90deg,var(--ice-soft),#fff 42%)}
     .event.strength{border-left-color:var(--strength);background:linear-gradient(90deg,var(--strength-soft),#fff 42%)}
     .event.shooting{border-left-color:var(--shooting);background:linear-gradient(90deg,var(--shooting-soft),#fff 42%)}
-    .event.stick{border-left-color:var(--stick);background:linear-gradient(90deg,var(--stick-soft),#fff 42%)}
+    .event.work{border-left-color:var(--work);background:linear-gradient(90deg,var(--work-soft),#fff 42%)}
     .event.recovery{border-left-color:var(--recovery);background:linear-gradient(90deg,var(--recovery-soft),#fff 42%)}
     .event.away{border-left-color:var(--away);background:linear-gradient(90deg,var(--away-soft),#fff 42%)}
     .event .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
@@ -132,14 +132,14 @@
     .dow{font-weight:900;color:var(--muted);font-size:12px;text-align:center;padding:5px;text-transform:uppercase;letter-spacing:.06em}
     .day{min-height:112px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:7px;display:flex;flex-direction:column;gap:5px;overflow:hidden;cursor:pointer}
     .day.other-month{background:#f9f9f6;color:#bbb}
-    .day.today{outline:3px solid rgba(57,255,20,.45)}
+    .day.today{outline:3px solid rgba(56,168,255,.50)}
     .day.selected{outline:3px solid rgba(18,61,42,.28)}
     .day-num{font-size:12px;font-weight:900;color:#333}
     .day-chip{font-size:9px;font-weight:900;border-radius:999px;padding:4px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#eee;color:#111}
     .day-chip.ice{background:var(--ice);color:var(--ice-ink)}
     .day-chip.strength{background:var(--strength);color:#fff}
     .day-chip.shooting{background:var(--shooting);color:#fff}
-    .day-chip.stick{background:var(--stick);color:#3f3100}
+    .day-chip.work{background:var(--work);color:#3f3100}
     .day-chip.recovery{background:var(--recovery);color:#064e3b}
     .day-chip.away{background:var(--away);color:#fff}
     .week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
@@ -159,7 +159,7 @@
     .compact-journal-row.ice{border-left-color:var(--ice);background:linear-gradient(90deg,var(--ice-soft),#fff 40%)}
     .compact-journal-row.strength{border-left-color:var(--strength);background:linear-gradient(90deg,var(--strength-soft),#fff 40%)}
     .compact-journal-row.shooting{border-left-color:var(--shooting);background:linear-gradient(90deg,var(--shooting-soft),#fff 40%)}
-    .compact-journal-row.stick{border-left-color:var(--stick);background:linear-gradient(90deg,var(--stick-soft),#fff 40%)}
+    .compact-journal-row.work{border-left-color:var(--work);background:linear-gradient(90deg,var(--work-soft),#fff 40%)}
     .compact-journal-row.recovery{border-left-color:var(--recovery);background:linear-gradient(90deg,var(--recovery-soft),#fff 40%)}
     .compact-journal-row.away{border-left-color:var(--away);background:linear-gradient(90deg,var(--away-soft),#fff 40%)}
     .compact-journal-row .compact-top{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:900;line-height:1.2}
@@ -174,7 +174,7 @@
     .journal-entry-card .journal-pill.ice{background:var(--ice);color:var(--ice-ink)}
     .journal-entry-card .journal-pill.strength{background:var(--strength);color:#fff}
     .journal-entry-card .journal-pill.shooting{background:var(--shooting);color:#fff}
-    .journal-entry-card .journal-pill.stick{background:var(--stick);color:#3f3100}
+    .journal-entry-card .journal-pill.work{background:var(--work);color:#3f3100}
     .journal-entry-card .journal-pill.away{background:var(--away);color:#fff}
     .journal-entry-card .journal-pill.recovery{background:var(--recovery);color:#064e3b}
     .journal-entry-card .journal-tag{background:var(--journal);color:var(--journal-ink);border-radius:999px;padding:6px 10px;font-size:11px;font-weight:900}
@@ -199,7 +199,7 @@
     .tracker-card.ice{border-left-color:var(--ice);background:linear-gradient(90deg,var(--ice-soft),#fff 44%)}
     .tracker-card.strength{border-left-color:var(--strength);background:linear-gradient(90deg,var(--strength-soft),#fff 44%)}
     .tracker-card.shooting{border-left-color:var(--shooting);background:linear-gradient(90deg,var(--shooting-soft),#fff 44%)}
-    .tracker-card.stick{border-left-color:var(--stick);background:linear-gradient(90deg,var(--stick-soft),#fff 44%)}
+    .tracker-card.work{border-left-color:var(--work);background:linear-gradient(90deg,var(--work-soft),#fff 44%)}
     .tracker-card.recovery{border-left-color:var(--recovery);background:linear-gradient(90deg,var(--recovery-soft),#fff 44%)}
     .tracker-card.away{border-left-color:var(--away);background:linear-gradient(90deg,var(--away-soft),#fff 44%)}
     .tracker-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
@@ -399,16 +399,16 @@
       <div class="hero-inner hero-grid">
         <div class="hero-left">
           <div class="hero-main">
-            <div class="logo-box"><img class="mission-logo" src="mission-logo.png" alt="Chicago Mission logo" onerror="this.onerror=null;this.src='https://chicagomission.com/wp-content/uploads/2026/05/Mission_Logo_2026-150x150-1.png';"><div class="logo-fallback" style="display:none">C</div></div>
+            <div class="logo-box"><img class="mission-logo" src="adrian-logo.png" alt="Adrian Bulldogs logo"><div class="logo-fallback" style="display:none">W</div></div>
             <div class="hero-name">
-              <h1>Graycen</h1>
+              <h1>Will</h1>
               <div class="hero-subtitle">Summer Training</div>
             </div>
           </div>
           <p class="hero-lead">Your summer training hub. Check your schedule, stay on top of the week ahead, and log the work that helps you get better — one day at a time.</p>
           <div class="hero-tools">
             <div class="hero-tool"><span>Plan</span><strong>Day · Week · Month</strong></div>
-            <div class="hero-tool"><span>Train</span><strong>Ice · Off-Ice · Skills</strong></div>
+            <div class="hero-tool"><span>Train</span><strong>Ice · Workout · Skills</strong></div>
             <div class="hero-tool"><span>Log</span><strong>What you trained</strong></div>
           </div>
         </div>
@@ -421,9 +421,9 @@
     </header>
 
     <header class="compact-header" id="compactHeader" aria-label="Compact dashboard header">
-      <div class="compact-logo"><img src="mission-logo.png" alt="Chicago Mission logo"><div class="compact-logo-fallback">C</div></div>
+      <div class="compact-logo"><img src="adrian-logo.png" alt="Adrian Bulldogs logo"><div class="compact-logo-fallback">W</div></div>
       <div class="compact-copy">
-        <div class="compact-title">Graycen Summer Training</div>
+        <div class="compact-title">Will Summer Training</div>
         <div class="compact-subtitle" id="compactViewLabel">Summer Training</div>
       </div>
     </header>
@@ -442,11 +442,11 @@
       <button class="legend-toggle" onclick="toggleLegend()"><span>Color Legend</span><span id="legendArrow">Show</span></button>
       <div class="legend-body">
         <span class="pill"><span class="dot ice"></span>On-Ice</span>
-        <span class="pill"><span class="dot strength"></span>Off-Ice</span>
-        <span class="pill"><span class="dot shooting"></span>Shooting</span>
+        <span class="pill"><span class="dot strength"></span>Workout</span>
+        <span class="pill"><span class="dot shooting"></span>Shooting/Skills</span>
         <span class="pill"><span class="dot away"></span>Away</span>
         <span class="pill"><span class="dot recovery"></span>Recovery</span>
-        <span class="pill"><span class="dot work"></span>Stick</span>
+        <span class="pill"><span class="dot work"></span>Refereeing</span>
         <span class="pill"><span class="dot other"></span>Other</span>
       </div>
     </section>
@@ -490,9 +490,9 @@
               <h2>Summer Totals</h2>
               <div class="quick">
                 <div class="quick-card"><div class="num" id="scheduledSkatesHome">0</div><div class="label">Ice</div></div>
-                <div class="quick-card"><div class="num" id="scheduledStrengthHome">0</div><div class="label">Off-Ice</div></div>
-                <div class="quick-card"><div class="num" id="scheduledShootingHome">0</div><div class="label">Shooting</div></div>
-                <div class="quick-card"><div class="num" id="scheduledStickHome">0</div><div class="label">Stick</div></div>
+                <div class="quick-card"><div class="num" id="scheduledStrengthHome">0</div><div class="label">Workout</div></div>
+                <div class="quick-card"><div class="num" id="scheduledShootingHome">0</div><div class="label">Skills</div></div>
+                <div class="quick-card"><div class="num" id="scheduledStickHome">0</div><div class="label">Ref</div></div>
               </div>
               <div class="status" id="remoteStatus">Loading shared schedule…</div>
             </div>
@@ -559,8 +559,8 @@
             <div class="quick" style="margin-top:10px">
               <div class="quick-card"><div class="num" id="summaryCompletedMinutes">0</div><div class="label">Done Min</div></div>
               <div class="quick-card"><div class="num" id="summaryOnIce">0</div><div class="label">Ice</div></div>
-              <div class="quick-card"><div class="num" id="summaryOff-Ice">0</div><div class="label">Off-Ice</div></div>
-              <div class="quick-card"><div class="num" id="summarySkills">0</div><div class="label">Shooting</div></div>
+              <div class="quick-card"><div class="num" id="summaryWorkout">0</div><div class="label">Workout</div></div>
+              <div class="quick-card"><div class="num" id="summarySkills">0</div><div class="label">Skills</div></div>
             </div>
           </div>
           <div class="card">
@@ -645,15 +645,15 @@
             <div class="form-grid">
               <input type="date" id="eventDate" class="full" required>
               <select id="eventType">
-                <option value="Strength">Off-Ice</option>
+                <option value="Workout">Workout</option>
                 <option value="Ice">On-Ice</option>
-                <option value="Shooting">Shooting</option>
+                <option value="ShootingSkills">Shooting/Skills</option>
                 <option value="Away">Away</option>
                 <option value="Recovery">Recovery</option>
-                <option value="Stickhandling">Stick</option>
+                <option value="Refereeing">Refereeing</option>
                 <option value="Other">Other</option>
               </select>
-              <input id="eventLocation" name="graycen_event_location_v3c" placeholder="Location" autocomplete="off" autocapitalize="words" spellcheck="false">
+              <input id="eventLocation" name="cam_event_location_v2c" placeholder="Location" autocomplete="off" autocapitalize="words" spellcheck="false">
               <label class="full" style="display:flex;gap:8px;align-items:center;font-weight:900"><input type="checkbox" id="eventAllDay" style="width:auto" onchange="toggleAllDayEvent()"> All-day event</label>
               <div id="eventStartWrap">
                 <div class="field-label">Start time</div>
@@ -671,7 +671,7 @@
                   <select id="eventEndAmPm"><option value="">AM/PM</option><option>AM</option><option>PM</option></select>
                 </div>
               </div>
-              <input class="full" id="eventTitle" name="graycen_event_title_v3c" placeholder="Title" autocomplete="off" autocapitalize="words" spellcheck="false" required>
+              <input class="full" id="eventTitle" name="cam_event_title_v2c" placeholder="Title" autocomplete="off" autocapitalize="words" spellcheck="false" required>
               <div class="full">
                 <div class="field-label">Calculated minutes</div>
                 <div id="eventMinutesDisplay" class="empty">Choose start and end times</div>
@@ -730,7 +730,7 @@
 <script>
 'use strict';
 
-const DASHBOARD_VERSION = 'graycen-dashboard-v3c-daily-tracker-2026-06-13';
+const DASHBOARD_VERSION = 'will-dashboard-v3c-daily-tracker-2026-06-13';
 
 
 const SCHEDULE_TIME_ZONE = 'America/Chicago';
@@ -763,14 +763,14 @@ function scheduleTimeZoneOffsetMinutes(dateISO){
   }
 }
 
-const STORAGE_KEY = 'graycenSummerDashboardSessions_v3c';
-const JOURNAL_KEY = 'graycenSummerDashboardJournal_v3c';
-const DELETED_KEY = 'graycenSummerDashboardDeletedEvents_v3c';
+const STORAGE_KEY = 'willSummerDashboardSessions_v3c';
+const JOURNAL_KEY = 'willSummerDashboardJournal_v3c';
+const DELETED_KEY = 'willSummerDashboardDeletedEvents_v3c';
 let editingEventId = '';
 let editingEventOriginalMinutes = 0;
 let userAdjustedEndTime = false;
-const VERSION_KEY = 'graycenSummerDashboardVersion';
-const SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw7-sHB4RcEVRg_GYjv_QnkUCi8-SH6X0nryXqqnnzev2fiUFJLrKef5CvIDKts9BotRw/exec';
+const VERSION_KEY = 'willSummerDashboardVersion';
+const SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxjKgifU4eSbvqRbsmmYSdmAOcLmPsbdiU7zD9qP0CUEc32pcSTYshqPQdiXwb3f7-Itg/exec';
 
 // Home Screen web apps can keep different local storage than Safari.
 // This version marker prevents old cached schedule data from distorting times.
@@ -780,89 +780,25 @@ try {
     // Clear only locally added schedule items from prior test builds.
     // Keep journal entries intact.
     Object.keys(localStorage).forEach(key => {
-      if (key.indexOf('graycenSummerDashboardSessions') === 0) localStorage.removeItem(key);
+      if (key.indexOf('willSummerDashboardSessions') === 0) localStorage.removeItem(key);
     });
     localStorage.setItem(VERSION_KEY, DASHBOARD_VERSION);
   }
 } catch (e) { console.warn('Version storage skipped', e); }
 
 const typeInfo = {
- Ice:{label:'On-Ice', cls:'ice'},
- Strength:{label:'Off-ice', cls:'strength'},
- Shooting:{label:'Shooting', cls:'shooting'},
- Stickhandling:{label:'Stickhandling', cls:'stick'},
- Recovery:{label:'Recovery', cls:'recovery'},
- Game:{label:'Game', cls:'ice'},
- Camp:{label:'Camp', cls:'other'},
- Other:{label:'Other', cls:'other'},
- Away:{label:'Away', cls:'away'}
+  Ice:{label:'On-Ice', cls:'ice'},
+  Workout:{label:'Workout', cls:'strength'},
+  ShootingSkills:{label:'Shooting/Skills', cls:'shooting'},
+  Away:{label:'Away', cls:'away'},
+  Recovery:{label:'Recovery', cls:'recovery'},
+  Refereeing:{label:'Refereeing', cls:'work'},
+  Other:{label:'Other', cls:'other'}
 };
 
-const baseSessions = [
- {date:'2026-06-01', type:'Ice', start:'12:10 PM', end:'1:10 PM', title:'Abbey', location:'Rosemont Ice Arena', owner:'Parent', minutes:60},
- {date:'2026-06-02', type:'Ice', start:'11:10 AM', end:'12:10 PM', title:'Abbey', location:'Rosemont Ice Arena', owner:'Parent', minutes:60},
- {date:'2026-06-03', type:'Ice', start:'4:30 PM', end:'5:30 PM', title:'Delaney', location:'Evanston', owner:'Parent', minutes:60},
- {date:'2026-06-29', type:'Ice', start:'6:40 PM', end:'8:00 PM', title:'Boudreau', location:'NSIA', owner:'Parent', minutes:80},
- {date:'2026-07-02', type:'Ice', start:'5:30 PM', end:'6:40 PM', title:'Boudreau', location:'Winnetka', owner:'Parent', minutes:70},
- {date:'2026-07-13', type:'Ice', start:'6:30 PM', end:'7:50 PM', title:'Boudreau', location:'NSIA', owner:'Parent', minutes:80},
- {date:'2026-07-16', type:'Ice', start:'5:30 PM', end:'6:40 PM', title:'Boudreau', location:'Winnetka', owner:'Parent', minutes:70},
- {date:'2026-07-27', type:'Ice', start:'6:30 PM', end:'7:50 PM', title:'Boudreau', location:'NSIA', owner:'Parent', minutes:80},
- {date:'2026-08-03', type:'Ice', start:'7:00 PM', end:'8:20 PM', title:'Boudreau', location:'NSIA', owner:'Parent', minutes:80},
- {date:'2026-08-06', type:'Ice', start:'5:30 PM', end:'6:40 PM', title:'Boudreau', location:'Winnetka', owner:'Parent', minutes:70},
- {date:'2026-08-10', type:'Ice', start:'7:00 PM', end:'8:20 PM', title:'Boudreau', location:'NSIA', owner:'Parent', minutes:80},
- {date:'2026-06-01', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-06-02', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-06-04', type:'Strength', start:'9:30 AM', end:'10:30 AM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-06-05', type:'Strength', start:'11:30 AM', end:'12:30 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-06-08', type:'Strength', start:'11:30 AM', end:'12:30 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-06-09', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-06-19', type:'Strength', start:'11:30 AM', end:'12:30 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-06-30', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-07-01', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-07-02', type:'Strength', start:'9:30 AM', end:'10:30 AM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-07-03', type:'Strength', start:'11:30 AM', end:'12:30 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-07-13', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-07-14', type:'Strength', start:'9:30 AM', end:'10:30 AM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-07-15', type:'Strength', start:'2:00 PM', end:'3:00 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-07-16', type:'Strength', start:'9:30 AM', end:'10:30 AM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-07-17', type:'Strength', start:'11:30 AM', end:'12:30 PM', title:'Phil', location:'Mt Prospect IBJ', owner:'Parent', minutes:60},
- {date:'2026-08-17', type:'Other', start:'All Day', end:'', title:'School starts', location:'School', owner:'Parent', minutes:0}
-];
-
-
-const awayBlocks = [
- {start:'2026-06-10', end:'2026-06-10', event:'Chicago / Rochester travel', city:'Chicago / Rochester', limited:true},
- {start:'2026-06-11', end:'2026-06-14', event:'PIP - Rochester', city:'Rochester', limited:true},
- {start:'2026-06-15', end:'2026-06-18', event:'Central District', city:'Away', limited:true},
- {start:'2026-06-24', end:'2026-06-28', event:'Cwench', city:'Away', limited:true},
- {start:'2026-07-04', end:'2026-07-11', event:'Costa Rica', city:'Costa Rica', limited:true},
- {start:'2026-07-19', end:'2026-07-24', event:'Natty Camp', city:'Away', limited:true},
- {start:'2026-07-28', end:'2026-07-31', event:'Northeastern', city:'Boston', limited:true},
- {start:'2026-08-04', end:'2026-08-06', event:'Tentative Michigan trip', city:'Michigan', limited:true, tentative:true}
-];
-
-
-function buildHomeSkills(){
- const items=[];
- const start=parseLocalDate('2026-06-01');
- const end=parseLocalDate('2026-08-14');
- let counter=0;
- for(let d=new Date(start); d<=end; d=addDays(d,1)){
- const day=d.getDay();
- if(day===0 || day===6) continue;
- const iso=toISODate(d);
- if(getAwayBlock(iso)) continue;
- const type = counter % 2 === 0 ? 'Stickhandling' : 'Shooting';
- const evening = day===2 || day===4;
- items.push({date:iso,type,start:evening?'6:30 PM':'9:00 AM',end:evening?'7:00 PM':'9:30 AM',title:type,location:'Home',owner:'Parent',minutes:30,generated:true});
- counter++;
- }
- return items;
-}
-
-
-const rawHomeSkills = buildHomeSkills();
-const builtInSchedule = [...baseSessions, ...rawHomeSkills];
+const baseSessions = [];
+const awayBlocks = [];
+const builtInSchedule = [];
 let sessions = builtInSchedule.map(row => normalizeEvent({...row, builtIn:true}));
 let remoteEvents = [];
 let localAddedEvents = loadLocalAddedEvents();
@@ -1000,13 +936,12 @@ function calcMinutes(start,end,dateISO){
 function normalizeType(type){
   const t=String(type||'Other').trim();
   const lower=t.toLowerCase();
-  if(['ice','on-ice','on ice','skate','skating','game'].includes(lower)) return lower==='game' ? 'Game' : 'Ice';
-  if(['strength','off-ice','off ice','off-ice workout','workout','lift','conditioning','gym','phil'].includes(lower)) return 'Strength';
-  if(lower.includes('shoot') || lower.includes('skill')) return 'Shooting';
-  if(lower.includes('stick')) return 'Stickhandling';
-  if(lower.includes('recover')) return 'Recovery';
+  if(['ice','on-ice','on ice','skate','skating'].includes(lower)) return 'Ice';
+  if(['workout','lift','conditioning','off-ice','off ice','off-ice workout','gym'].includes(lower)) return 'Workout';
+  if(lower.includes('shoot') || lower.includes('skill') || lower.includes('stick')) return 'ShootingSkills';
   if(lower.includes('away') || lower.includes('travel')) return 'Away';
-  if(lower.includes('camp')) return 'Camp';
+  if(lower.includes('recover')) return 'Recovery';
+  if(lower === 'work' || lower.includes('referee') || lower.includes('refereeing')) return 'Refereeing';
   return typeInfo[t] ? t : 'Other';
 }
 
@@ -1236,6 +1171,7 @@ function chipColorForClass(cls){
     strength:'--strength',
     shooting:'--shooting',
     stick:'--stick',
+    work:'--work',
     recovery:'--recovery',
     away:'--away'
   };
@@ -1244,6 +1180,7 @@ function chipColorForClass(cls){
     strength:'#8b5cf6',
     shooting:'#f97316',
     stick:'#f4c430',
+    work:'#f4c430',
     recovery:'#20c997',
     away:'#ef4444',
     other:'#8b8b8b'
@@ -1286,7 +1223,7 @@ function calendarChipHTML(label, cls='other'){
 
 function shortLabel(e){
   const t=String(e.title||'').trim();
-  if(['Shooting','ShootingSkills'].includes(t)) return 'Skills';
+  if(['Shooting/Skills','ShootingSkills'].includes(t)) return 'Skills';
   if(t.length <= 12) return t;
   const first=t.split(/\s+/)[0];
   return first.length <= 12 ? first : t.slice(0,12);
@@ -1503,9 +1440,9 @@ function renderTotals(){
   const count=t=>all.filter(e=>normalizeType(e.type)===t).length;
   const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
   set('scheduledSkatesHome',count('Ice'));
-  set('scheduledStrengthHome',count('Off-Ice'));
-  set('scheduledShootingHome',count('Shooting'));
-  set('scheduledStickHome',count('Stickhandling'));
+  set('scheduledStrengthHome',count('Workout'));
+  set('scheduledShootingHome',count('ShootingSkills'));
+  set('scheduledStickHome',count('Refereeing'));
 
   const completed=all.filter(e=>normalizeEventStatus(e.status)==='Completed');
   const skipped=all.filter(e=>normalizeEventStatus(e.status)==='Skipped');
@@ -1519,8 +1456,8 @@ function renderTotals(){
   set('summaryCompletionPct', pct + '%');
   set('summaryCompletedMinutes', completedMinutes);
   set('summaryOnIce', completed.filter(e=>normalizeType(e.type)==='Ice').length);
-  set('summaryOff-Ice', completed.filter(e=>normalizeType(e.type)==='Off-Ice').length);
-  set('summarySkills', completed.filter(e=>normalizeType(e.type)==='Shooting').length);
+  set('summaryWorkout', completed.filter(e=>normalizeType(e.type)==='Workout').length);
+  set('summarySkills', completed.filter(e=>normalizeType(e.type)==='ShootingSkills').length);
 
   const allJournalEntries=combinedJournals();
   set('journalEntries', allJournalEntries.length);
@@ -1556,7 +1493,7 @@ function sheetJournalToEntry(j){
     effort:j.effort || '',
     energy:j.energy || '',
     quickNote:j.quickNote || '',
-    addedBy:j.addedBy || 'Graycen',
+    addedBy:j.addedBy || 'Will',
     createdAt:j.createdAt || '',
     updatedAt:j.updatedAt || '',
     source:'sheet'
@@ -1574,7 +1511,7 @@ function sheetEventToJournal(e){
     effort:'',
     energy:'',
     quickNote:'',
-    addedBy:'Graycen',
+    addedBy:'Will',
     createdAt:e.createdAt || '',
     source:e.remote ? 'sheet' : 'local'
   };
@@ -1612,7 +1549,7 @@ async function saveJournalEntry(){
   const effort=document.getElementById('journalEffort').value;
   const energy=document.getElementById('journalEnergy').value;
   const quickNote=document.getElementById('journalQuickNote').value.trim();
-  if(!workedOn){ alert('Please enter what Graycen worked on.'); return; }
+  if(!workedOn){ alert('Please enter what Will worked on.'); return; }
   const entry={
     id:'journal-'+Date.now()+'-'+Math.floor(Math.random()*100000),
     eventId:document.getElementById('journalEventId').value || '',
@@ -1624,7 +1561,7 @@ async function saveJournalEntry(){
     effort,
     energy,
     quickNote,
-    addedBy:'Graycen',
+    addedBy:'Will',
     createdAt:new Date().toISOString(),
     updatedAt:new Date().toISOString()
   };
@@ -1749,7 +1686,7 @@ async function postJournalToSheet(j){
   payload.set('effort',j.effort || '');
   payload.set('energy',j.energy || '');
   payload.set('quickNote',j.quickNote || '');
-  payload.set('addedBy',j.addedBy || 'Graycen');
+  payload.set('addedBy',j.addedBy || 'Will');
   payload.set('createdAt',j.createdAt || new Date().toISOString());
   payload.set('updatedAt',new Date().toISOString());
   try{
@@ -1827,7 +1764,7 @@ function defaultDurationForType(type){
   const t=normalizeType(type || document.getElementById('eventType')?.value || 'Other');
   if(t === 'ShootingSkills') return 45;
   if(t === 'Recovery') return 30;
-  if(t === 'Work') return 120;
+  if(t === 'Refereeing') return 120;
   return 60;
 }
 function addMinutesToTimeLabel(value, minutes){
@@ -2072,7 +2009,7 @@ async function deleteSelectedEvent(){
 function exportDashboardData(){
   const data=JSON.stringify({version:DASHBOARD_VERSION, localAddedEvents, journals}, null, 2);
   const blob=new Blob([data],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a');
-  a.href=url; a.download='graycen-training-dashboard-backup.json'; a.click(); URL.revokeObjectURL(url);
+  a.href=url; a.download='will-training-dashboard-backup.json'; a.click(); URL.revokeObjectURL(url);
 }
 function resetDashboardData(){
   if(confirm('This will delete journal entries and locally added events saved on this device. Continue?')){
