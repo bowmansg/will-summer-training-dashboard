@@ -1152,12 +1152,44 @@ function statusBadgeHTML(status){
   const clean=normalizeEventStatus(status);
   return `<span class="status-badge ${statusClass(clean)}">${escapeHTML(clean)}</span>`;
 }
-function journalForEvent(eventId){
-  if(!eventId) return null;
-  return combinedJournals().find(j=>String(j.eventId || '') === String(eventId)) || null;
+function journalForEvent(eventOrId){
+  const eventObj = (eventOrId && typeof eventOrId === 'object') ? eventOrId : null;
+  const eventId = eventObj ? eventObj.id : eventOrId;
+  const journalsList = combinedJournals();
+  if(eventId){
+    const exact = journalsList.find(j=>String(j.eventId || '') === String(eventId));
+    if(exact) return exact;
+  }
+  if(!eventObj) return null;
+  return journalsList.find(j=>journalMatchesEvent(j,eventObj)) || null;
+}
+function normalizeJournalMatchText(value){
+  return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+}
+function textLooksLikeSameEvent(a,b){
+  const x=normalizeJournalMatchText(a), y=normalizeJournalMatchText(b);
+  if(!x || !y) return false;
+  if(x === y) return true;
+  // Allow older journal rows to match when the event title was stored inside the note/title text.
+  if(x.length >= 6 && y.includes(x)) return true;
+  if(y.length >= 6 && x.includes(y)) return true;
+  return false;
+}
+function journalMatchesEvent(j,e){
+  if(!j || !e) return false;
+  if(String(j.eventId || '') && String(j.eventId || '') === String(e.id || '')) return true;
+  if(String(j.date || '') !== String(e.date || '')) return false;
+  const title=e.title || '';
+  const journalTitle=j.eventTitle || '';
+  const worked=j.whatWorkedOn || '';
+  const quick=j.quickNote || '';
+  if(textLooksLikeSameEvent(journalTitle,title)) return true;
+  if(textLooksLikeSameEvent(worked,title)) return true;
+  if(textLooksLikeSameEvent(quick,title)) return true;
+  return false;
 }
 function journalStateHTML(e){
-  const has = !!journalForEvent(e.id);
+  const has = !!journalForEvent(e);
   return `<span class="journal-state ${has?'added':'needed'}">${has?'Journal Added':'Journal Needed'}</span>`;
 }
 function trackerEventCard(e){
@@ -1167,7 +1199,7 @@ function trackerEventCard(e){
   const status = normalizeEventStatus(e.status || 'Planned');
   const isDone = status === 'Completed';
   const isSkipped = status === 'Skipped';
-  const hasJournal = !!journalForEvent(e.id);
+  const hasJournal = !!journalForEvent(e);
   const canReset = status !== 'Planned';
   const resetButton = canReset ? `<button class="mini-action reset" onclick="event.stopPropagation();markEventStatus('${safeId}','Planned')">Reset</button>` : '';
   return `<div class="tracker-card ${cls}">
@@ -1408,7 +1440,7 @@ function isTodoEvent(e){
   if(!e) return false;
   const status=normalizeEventStatus(e.status || 'Planned');
   if(status !== 'Planned') return false;
-  if(journalForEvent(e.id)) return false;
+  if(journalForEvent(e)) return false;
   const type=normalizeType(e.type);
   if(type === 'Away') return false;
   const cutoff=todoCutoffDateTime(e);
@@ -1543,7 +1575,7 @@ function renderTotals(){
 
   const allJournalEntries=combinedJournals();
   set('journalEntries', allJournalEntries.length);
-  set('summaryJournalNeeded', completed.filter(e=>!journalForEvent(e.id)).length);
+  set('summaryJournalNeeded', completed.filter(e=>!journalForEvent(e)).length);
   set('summaryGreatEffort', allJournalEntries.filter(j=>String(j.effort||'').toLowerCase()==='great').length);
   set('summaryGoodEnergy', allJournalEntries.filter(j=>['good','great'].includes(String(j.energy||'').toLowerCase())).length);
 }
@@ -1825,7 +1857,7 @@ function openJournalForEvent(encodedId){
   const ctxTitle=document.getElementById('journalContextTitle'); if(ctxTitle) ctxTitle.textContent=e.title || 'Selected event';
   const ctxMeta=document.getElementById('journalContextMeta'); if(ctxMeta) ctxMeta.textContent=`${formatLongDate(e.date)} · ${time}${e.location ? ' · '+e.location : ''}`;
   const formTitle=document.getElementById('journalFormTitle'); if(formTitle) formTitle.textContent='Journal for This Event';
-  const existing=journalForEvent(e.id);
+  const existing=journalForEvent(e);
   if(existing){
     setVal('journalWorkedOn', existing.whatWorkedOn || '');
     setVal('journalEffort', existing.effort || '');
