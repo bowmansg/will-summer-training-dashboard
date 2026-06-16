@@ -79,7 +79,7 @@
     .next-card .label{color:var(--warm2);text-transform:uppercase;font-weight:900;font-size:12px;letter-spacing:.08em}
     .next-card .title{font-size:28px;font-weight:900;line-height:1.05;color:#111827}
     .next-card .meta{color:#4b5563;font-size:15px;line-height:1.35;font-weight:750}
-    .tabs{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);display:grid;grid-template-columns:repeat(7,1fr);gap:7px;border:1px solid var(--line);border-radius:22px;padding:7px;margin-bottom:14px;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+    .tabs{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);display:grid;grid-template-columns:repeat(8,1fr);gap:7px;border:1px solid var(--line);border-radius:22px;padding:7px;margin-bottom:14px;box-shadow:0 8px 24px rgba(0,0,0,.05)}
     .tab{border:0;border-radius:16px;background:transparent;color:#333;padding:12px 8px;font-weight:900;cursor:pointer;font-size:13px}
     .tab.active{background:var(--warm);color:#fff}
     .legend-card{border:1px solid var(--line);border-radius:20px;background:var(--soft2);margin-bottom:14px;overflow:hidden}
@@ -434,6 +434,7 @@
       <button class="tab" data-view="day" onclick="showView('day')">Day</button>
       <button class="tab" data-view="week" onclick="showView('week')">Week</button>
       <button class="tab" data-view="month" onclick="showView('month')">Month</button>
+      <button class="tab" data-view="todo" onclick="showView('todo')">To Do</button>
       <button class="tab" data-view="summary" onclick="showView('summary')">Summary</button>
       <button class="tab" data-view="journal" onclick="showView('journal')">Journal</button>
       <button class="tab" data-view="add" onclick="showView('add')">Add Event</button>
@@ -473,7 +474,7 @@
                 <button class="command-tile" onclick="showView('day')"><span>Open</span>Day Plan</button>
                 <button class="command-tile" onclick="showView('journal')"><span>Log</span>Journal</button>
                 <button class="command-tile" onclick="showView('add')"><span>Add</span>Event</button>
-                <button class="command-tile" onclick="showView('summary')"><span>Check</span>Progress</button>
+                <button class="command-tile" onclick="showView('todo')"><span>Check</span>To Do</button>
               </div>
             </div>
             <div class="card">
@@ -543,6 +544,19 @@
             <button class="navbtn secondary" onclick="moveMonth(1)">Next ›</button>
           </div>
           <div class="calendar" id="monthCalendar"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-todo">
+        <div class="card">
+          <div class="muted">Open items</div>
+          <h2>To Do</h2>
+          <p class="status">Past scheduled items that still need to be completed, skipped, or journaled.</p>
+          <div class="controls">
+            <button class="navbtn secondary" onclick="jumpToday();showView('todo')">Refresh Today</button>
+            <button class="navbtn secondary" onclick="showView('journal')">Open Journal</button>
+          </div>
+          <div class="event-list" id="todoList"></div>
         </div>
       </section>
 
@@ -731,7 +745,7 @@
 <script>
 'use strict';
 
-const DASHBOARD_VERSION = 'will-dashboard-v3e-away-filter-fix-2026-06-16-details-edit';
+const DASHBOARD_VERSION = 'will-dashboard-v3f-away-filter-fix-2026-06-16-todo-tab';
 
 
 const SCHEDULE_TIME_ZONE = 'America/Chicago';
@@ -1330,6 +1344,7 @@ function compactHeaderSubtitle(name){
     return `${formatDateHuman(toISODate(start))} – ${formatDateHuman(toISODate(end))}`;
   }
   if(name === 'month') return displayMonth.toLocaleDateString(undefined,{month:'long',year:'numeric'});
+  if(name === 'todo') return 'To Do';
   if(name === 'summary') return 'Training Summary';
   if(name === 'journal') return 'Training Journal';
   if(name === 'add') return 'Add Event';
@@ -1375,8 +1390,65 @@ function toggleLegend(){
 }
 
 function renderAll(){
-  renderNext(); renderDay(); renderWeekList(); renderWeekGrid(); renderMonth(); renderTotals(); renderJournals(); renderUpcoming(); updateMinutesDisplay(); updateCompactHeader(getActiveViewName());
+  renderNext(); renderDay(); renderTodo(); renderWeekList(); renderWeekGrid(); renderMonth(); renderTotals(); renderJournals(); renderUpcoming(); updateMinutesDisplay(); updateCompactHeader(getActiveViewName());
 }
+
+function todoCutoffDateTime(e){
+  const d=parseLocalDate(e.date);
+  if(!d) return null;
+  const start=timeToMinutes(e.start,e.date);
+  const end=timeToMinutes(e.end,e.date);
+  if(start === -1) return null; // all-day items do not require a training journal
+  const mins=(end !== null && end !== -1) ? end : start;
+  if(mins === null) return null;
+  d.setHours(Math.floor(mins/60), mins%60, 0, 0);
+  return d;
+}
+function isTodoEvent(e){
+  if(!e) return false;
+  const status=normalizeEventStatus(e.status || 'Planned');
+  if(status !== 'Planned') return false;
+  if(journalForEvent(e.id)) return false;
+  const type=normalizeType(e.type);
+  if(type === 'Away') return false;
+  const cutoff=todoCutoffDateTime(e);
+  if(!cutoff) return false;
+  return cutoff < new Date();
+}
+function completeAndJournal(encodedId){
+  markEventStatus(encodedId,'Completed');
+  setTimeout(()=>openJournalForEvent(encodedId),80);
+}
+function todoEventCard(e){
+  const cls=typeClass(e.type);
+  const time=formatEventTime(e) || 'All Day';
+  const safeId=encodeURIComponent(e.id || makeEventId(e.date,e.start,e.title));
+  return `<div class="tracker-card ${cls}">
+    <div class="tracker-head">
+      <div>
+        <div class="tracker-title">${escapeHTML(e.title)}</div>
+        <div class="tracker-meta">${escapeHTML(formatLongDate(e.date))} · ${escapeHTML(typeLabel(e.type))}${e.location ? ' · '+escapeHTML(e.location) : ''}${e.minutes ? ' · '+e.minutes+' min' : ''}</div>
+      </div>
+      <div style="display:grid;gap:6px;justify-items:end"><div class="tracker-time">${escapeHTML(time)}</div>${statusBadgeHTML('Planned')}<span class="journal-state needed">Journal Needed</span></div>
+    </div>
+    ${e.notes ? `<div class="tracker-meta">${escapeHTML(e.notes)}</div>` : ''}
+    <div class="tracker-actions">
+      <button class="mini-action done" onclick="event.stopPropagation();completeAndJournal('${safeId}')">Complete & Journal</button>
+      <button class="mini-action skip" onclick="event.stopPropagation();markEventStatus('${safeId}','Skipped')">Skip</button>
+      <button class="mini-action details" onclick="event.stopPropagation();openEventDetail('${safeId}')">Details / Edit</button>
+    </div>
+  </div>`;
+}
+function renderTodo(){
+  const container=document.getElementById('todoList');
+  if(!container) return;
+  const items=allSessions().filter(isTodoEvent).sort((a,b)=>{
+    const ad=todoCutoffDateTime(a), bd=todoCutoffDateTime(b);
+    return (bd ? bd.getTime() : 0) - (ad ? ad.getTime() : 0);
+  });
+  container.innerHTML=items.length ? items.map(todoEventCard).join('') : '<div class="empty">Nothing open right now. Past items are either journaled, skipped, completed, or not due yet.</div>';
+}
+
 function renderNext(){
   const now=new Date();
   const next=allSessions().map(e=>({e,dt:eventStartDateTime(e)})).filter(x=>x.dt && x.dt >= now).sort((a,b)=>a.dt-b.dt)[0];
