@@ -730,7 +730,7 @@
 <script>
 'use strict';
 
-const DASHBOARD_VERSION = 'will-dashboard-v3c-daily-tracker-2026-06-13';
+const DASHBOARD_VERSION = 'will-dashboard-v3d-away-filter-fix-2026-06-16';
 
 
 const SCHEDULE_TIME_ZONE = 'America/Chicago';
@@ -993,11 +993,19 @@ function eventSemanticKey(e){
 function isDuplicateAwayEvent(e){
   const block = getAwayBlock(e.date);
   if(!block) return false;
+
+  // IMPORTANT:
+  // During camps/tournaments/trips, real scheduled events can include the trip
+  // name in the title. Do not hide real Ice/Workout/Skills/Refereeing items
+  // just because their title looks similar to the all-day Away block.
+  // Only hide true Away/travel rows here.
+  const typ = normalizeType(e.type);
   const title = String(e.title || '').trim().toLowerCase();
   const loc = String(e.location || '').trim().toLowerCase();
-  const typ = normalizeType(e.type);
   const blockTitle = String(block.event || '').trim().toLowerCase();
-  return typ === 'Away' || title === blockTitle || (title && blockTitle && (title.includes(blockTitle) || blockTitle.includes(title))) || loc === 'away';
+
+  if(typ !== 'Away') return false;
+  return title === blockTitle || loc === 'away' || title === 'away' || title === 'travel';
 }
 function eventQuality(e){
   let score = 0;
